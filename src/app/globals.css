@@ -6,62 +6,73 @@ body {
   font-size: 16px;
 }
 
-.fill-red {
+.svg-fill-red {
   filter: invert(36%) sepia(52%) saturate(5778%) hue-rotate(339deg)
     brightness(87%) contrast(118%);
 }
 
-.fill-red-hover {
-  filter: invert(6%) sepia(93%) saturate(6191%) hue-rotate(354deg) brightness(117%) contrast(103%);
+.svg-fill-red-hover {
+  filter: invert(6%) sepia(93%) saturate(6191%) hue-rotate(354deg)
+    brightness(117%) contrast(103%);
 }
-.fill-grey {
-  filter: invert(52%) sepia(87%) saturate(0%) hue-rotate(226deg) brightness(138%) contrast(98%);
+.svg-fill-grey {
+  filter: invert(52%) sepia(87%) saturate(0%) hue-rotate(226deg)
+    brightness(138%) contrast(98%);
 }
 
-.fill-white {
-  filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(322deg) brightness(102%) contrast(101%);
+.svg-fill-white {
+  filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(322deg)
+    brightness(102%) contrast(101%);
 }
- 
- 
+
+.svg-fill-black {
+  filter: invert(0%) sepia(81%) saturate(7426%) hue-rotate(352deg)
+    brightness(96%) contrast(101%);
+}
+
 .checkbox + span:before {
-   content: "\f096";
-   display: inline-block;
-   margin-right: 5px;
-   font-family: "FontAwesome";
-   font-weight: normal;
-   width: 1em;
- }
- 
- /**--- Checked ---**/
- 
+  content: "\f096";
+  display: inline-block;
+  margin-right: 5px;
+  font-family: "FontAwesome";
+  font-weight: normal;
+  width: 1em;
+}
+
+/**--- Checked ---**/
+
 .checkbox:checked + span:before {
-   content: "\f14a";
-   color: #00c853;
-   animation: pop 180ms ease-in;
- }
- 
- /**--- Disabled ---**/
- 
+  content: "\f14a";
+  color: #00c853;
+  animation: pop 180ms ease-in;
+}
+
+/**--- Disabled ---**/
+
 .checkbox:disabled + span {
-   color: #999;
- }
- 
+  color: #999;
+}
+
 .checkbox:disabled + span:before {
-   content: "\f0c8";
-   color: #999;
- }
- 
- 
- 
- @keyframes pop {
-     0% {
-       transform: scale(0);
-     }
-     90% {
-       transform: scale(1.4);
-     }
-     100% {
-       transform: scale(1);
-     }
-   }
-   
+  content: "\f0c8";
+  color: #999;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0);
+  }
+  90% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: "";
+}

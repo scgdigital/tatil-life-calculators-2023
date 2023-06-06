@@ -33,7 +33,7 @@ export function Input({
       <div
         className={cx(
           borderStyle,
-          "flex relative bg-tatil-lightgrey w-full py-2 px-4 rounded-[5px] transition-all border-[1px] focus-within:border-tatil-black"
+          "flex relative bg-tatil-lightgrey w-full py-2 px-4 rounded-[12px] transition-all border-[1px] focus-within:border-tatil-black"
         )}
       >
         <input
