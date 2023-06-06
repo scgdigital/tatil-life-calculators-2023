@@ -36,6 +36,7 @@ export const Toggle = ({
           type="checkbox"
           className="sr-only peer"
           checked={checked}
+          onChange={toggle}
           {...props}
         />
         <div

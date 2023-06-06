@@ -1,9 +1,12 @@
 "use client";
 import { Button } from "@/components/Button";
 import { Checkbox } from "@/components/Checkbox";
+import { Dropdown } from "@/components/Dropdown/Dropdown";
+import { Input } from "@/components/Input";
 import { OptIns } from "@/components/OptIns";
 import { ProgressSteps } from "@/components/ProgressSteps";
 import { Toggle } from "@/components/Toggle";
+import { mockOptions } from "@/utils/mocks";
 
 export default function Home() {
   return (
@@ -56,6 +59,17 @@ export default function Home() {
       </div>
       <OptIns value={false} />
       <ProgressSteps currentStep={4} steps={7} />
+      <div className="my-6">
+        <Input placeholder="Input" initialValue="test" />
+      </div>
+      <div className="my-6">
+        <Dropdown
+          placeholder="Input"
+          initialValue="test"
+          options={mockOptions}
+          touched
+        />
+      </div>
     </main>
   );
 }
