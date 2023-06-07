@@ -85,11 +85,11 @@ export const Button = ({
           height={8}
           className={cx(
             "w-2 h-4 ml-5",
-            props.variant === "secondary" && "fill-red",
+            props.variant === "secondary" && "svg-fill-red",
             !props?.disabled
               ? "group-hover:translate-x-1 transition duration-300"
               : "",
-            props.variant === "secondary" && props?.disabled && "fill-grey"
+            props.variant === "secondary" && props?.disabled && "svg-fill-grey"
           )}
           alt="right arrow next"
         />

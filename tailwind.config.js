@@ -13,6 +13,9 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "tatil-gradient": `linear-gradient(83.54deg, #000000 0%, #EE2127 52.6%, #EE2127 100%)`,
       },
+      fontFamily: {
+        roboto: ["Roboto", "sans-serif"],
+      },
       colors: {
         tatil: {
           red: "#EE2127",

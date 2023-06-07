@@ -73,6 +73,43 @@ body {
 select {
   -webkit-appearance: none;
   -moz-appearance: none;
-  text-indent: 1px;
-  text-overflow: "";
+}
+
+.react-datepicker {
+  font-family: Roboto, sans-serif !important;
+}
+.react-datepicker__header {
+  background-color: white !important;
+  border: none !important;
+}
+
+div .react-datepicker__day {
+  font-weight: 400 !important;
+  color: #1d1b20 !important;
+  font-size: 0.8rem !important;
+  /* line-height: 1.5rem !important; */
+  border-radius: 50% !important;
+  flex-shrink: 0 !important;
+}
+
+div .react-datepicker__day:hover:not(.react-datepicker__day--selected) {
+  @apply !bg-tatil-palette-red-200 transition-all duration-300 ease-in;
+}
+
+div .react-datepicker__day--selected {
+  @apply !bg-tatil-red !text-white;
+}
+
+div .react-datepicker__header {
+  padding: 0 !important;
+}
+
+div .react-datepicker__day--today {
+  background: transparent !important;
+  border: 1px dashed #FF555A !important;
+}
+
+div .react-datepicker__week {
+  height: fit-content !important;
+  padding: 1px 0 !important;
 }

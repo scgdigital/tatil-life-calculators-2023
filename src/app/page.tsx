@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/Button";
 import { Checkbox } from "@/components/Checkbox";
+import { DatePicker } from "@/components/DatePicker";
 import { Dropdown } from "@/components/Dropdown/Dropdown";
 import { Input } from "@/components/Input";
 import { OptIns } from "@/components/OptIns";
@@ -64,11 +65,13 @@ export default function Home() {
       </div>
       <div className="my-6">
         <Dropdown
-          placeholder="Input"
           initialValue="test"
           options={mockOptions}
           touched
         />
+      </div>
+      <div className="my-6">
+        <DatePicker />
       </div>
     </main>
   );
