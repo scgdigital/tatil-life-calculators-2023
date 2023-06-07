@@ -156,7 +156,13 @@ export function DatePicker({
               dateFormat={"dd/MM/yyyy"}
               formatWeekDay={(nameOfDay) => nameOfDay.substr(0, 1)}
               selected={
-                isValid(new Date(value))
+                isValid(
+                  new Date(
+                    Number(value.split("/")[2]),
+                    Number(value.split("/")[1]) - 1,
+                    Number(value.split("/")[0])
+                  )
+                )
                   ? new Date(
                       Number(value.split("/")[2]),
                       Number(value.split("/")[1]) - 1,
