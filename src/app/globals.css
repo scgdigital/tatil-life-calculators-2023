@@ -105,11 +105,14 @@ div .react-datepicker__header {
 }
 
 div .react-datepicker__day--today {
-  background: transparent !important;
   border: 1px dashed #FF555A !important;
 }
 
 div .react-datepicker__week {
   height: fit-content !important;
   padding: 1px 0 !important;
+}
+
+div .react-datepicker__day--keyboard-selected {
+  background-color: transparent !important;
 }
