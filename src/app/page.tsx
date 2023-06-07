@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <main>
       Tatil Life Calculators
-      <div className="grid grid-cols-4 auto-rows-fr gap-8 my-6">
+      <div className="flex flex-wrap justify-center gap-8 my-6">
         <Button variant="primary" withArrow onClick={() => {}}>
           Primary
         </Button>
@@ -27,7 +27,7 @@ export default function Home() {
           Disabled
         </Button>
       </div>
-      <div className="grid grid-cols-4 auto-rows-fr gap-8 my-6">
+      <div className="flex flex-wrap justify-center auto-rows-fr gap-8 my-6">
         <Button
           className="rounded-full"
           variant="primary"
