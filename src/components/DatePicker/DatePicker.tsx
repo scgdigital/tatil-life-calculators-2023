@@ -142,7 +142,7 @@ export function DatePicker({
         <>
           <div
             className={cx(
-              "absolute inset-0 w-full h-full bg-tatil-black bg-opacity-20",
+              "absolute inset-0 w-screen h-screen bg-tatil-black bg-opacity-20",
               isDialogOpen
                 ? "opacity-100 transition-all duration-500 delay-100"
                 : "opacity-0"
