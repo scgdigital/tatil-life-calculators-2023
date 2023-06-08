@@ -1,26 +1,70 @@
-export const H1 = ({ children }: { children: React.ReactNode }) => (
-  <div className="text-[1.875rem] font-semibold">{children}</div>
+import { cx } from "class-variance-authority";
+
+export const H1 = ({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => (
+  <div className={cx("text-[1.875rem] font-semibold", className)}>
+    {children}
+  </div>
 );
 
-export const H2 = ({ children }: { children: React.ReactNode }) => (
-  <div className="text-[1.25rem] font-semibold">{children}</div>
+export const H2 = ({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => (
+  <div className={cx("text-[1.25rem] font-semibold", className)}>
+    {children}
+  </div>
 );
 
-export const BodyText = ({ children }: { children: React.ReactNode }) => (
-  <div className="text-[1.125rem]">{children}</div>
+export const BodyText = ({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => <div className={cx("text-[1.125rem]", className)}>{children}</div>;
+
+export const BodyTextAlt = ({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => <div className={cx("text-[1rem]", className)}>{children}</div>;
+export const BodyTextAlt2 = ({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => (
+  <div className={cx("text-[0.875rem] font-semibold", className)}>
+    {children}
+  </div>
 );
 
-export const BodyTextAlt = ({ children }: { children: React.ReactNode }) => (
-  <div className="text-[1rem]">{children}</div>
-);
-export const BodyTextAlt2 = ({ children }: { children: React.ReactNode }) => (
-  <div className="text-[0.875rem] font-semibold">{children}</div>
+export const ButtonText = ({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => (
+  <div className={cx("text-[1rem] font-semibold", className)}>{children}</div>
 );
 
-export const ButtonText = ({ children }: { children: React.ReactNode }) => (
-  <div className="text-[1rem] font-semibold">{children}</div>
-);
-
-export const ButtonTextAlt = ({ children }: { children: React.ReactNode }) => (
-  <div className="text-[1rem] font-bold">{children}</div>
-);
+export const ButtonTextAlt = ({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => <div className={cx("text-[1rem] font-bold", className)}>{children}</div>;

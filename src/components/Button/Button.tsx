@@ -77,7 +77,7 @@ export const Button = ({
       }
     ),
     withArrow ? (
-      <div className="flex items-center justify-between flex-wrap">
+      <div className="flex items-center justify-between flex-wrap group">
         <div>{children}</div>
         <Image
           src={rightArrow}
