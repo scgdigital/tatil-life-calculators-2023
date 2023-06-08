@@ -16,7 +16,7 @@ export function WholeLifeHeader({ currentStep, next, prev, ...props }: any) {
           ) : null}
         </div>
       </div>
-      <Header className="mt-4 mb-14">Let&apos;s get a quote in under 90 seconds.</Header>
+      <Header className="mt-4 mb-14 text-left">Let&apos;s get a quote in under 90 seconds.</Header>
     </>
   );
 }

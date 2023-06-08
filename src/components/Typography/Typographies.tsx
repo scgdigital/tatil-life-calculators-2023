@@ -51,7 +51,7 @@ export const BodyTextAlt2 = ({
   </div>
 );
 
-export const ButtonText = ({
+export const SmallHeader = ({
   children,
   className = "",
 }: {
@@ -61,7 +61,7 @@ export const ButtonText = ({
   <div className={cx("text-[1rem] font-semibold", className)}>{children}</div>
 );
 
-export const ButtonTextAlt = ({
+export const SmallHeaderAlt = ({
   children,
   className = "",
 }: {

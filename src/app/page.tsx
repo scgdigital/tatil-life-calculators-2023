@@ -7,7 +7,7 @@ import { mockSteps } from "@/utils/mocks";
 
 export default function Home() {
   return (
-    <main>
+    <main className="max-w-[590px] mx-auto">
       <FormWizard
         header={WholeLifeHeader}
         footer={NextButton}
