@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import tatilLogo from "@/assets/logo.png";
-import { BodyTextAlt2, H1, H2 } from "../Typography";
 import { Button } from "../Button";
+import { H2 } from "../Typography";
 
 export function Navbar() {
   return (
@@ -20,7 +20,7 @@ export function Navbar() {
             className="w-[88px] h-[45px] lg:w-[103px] lg:h-[53px] object-contain flex-shrink-0"
           />
         </Link>
-        <H2 className="text-[0.75rem] md:text-[1rem] lg:text-[1.25rem] transition-all">
+        <H2 className="text-[0.75rem] sm:text-[1rem] md:text-[1.25rem] transition-all text-[#353535]">
           Whole Life Insurance the <span className="text-tatil-red">smart</span>{" "}
           way
         </H2>
@@ -30,7 +30,7 @@ export function Navbar() {
         className="hidden lg:block rounded-[100px] h-[43px]"
         onClick={() => {}}
       >
-        Get Advice
+        <div className="contents">Get Advice</div>
       </Button>
     </div>
   );
