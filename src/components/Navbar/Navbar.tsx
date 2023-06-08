@@ -9,7 +9,7 @@ import { H2 } from "../Typography";
 
 export function Navbar() {
   return (
-    <div className="h-[85px] flex justify-between px-8 lg:px-11 w-full shadow-lg shadow-tatil-grey items-center">
+    <div className="h-[85px] flex justify-between px-8 lg:px-11 w-full shadow-lg shadow-tatil-grey items-center bg-tatil-white">
       <div className="flex items-center gap-x-8">
         <Link href="/">
           <Image

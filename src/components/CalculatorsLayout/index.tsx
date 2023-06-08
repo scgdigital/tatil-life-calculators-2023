@@ -7,9 +7,9 @@ export const CalculatorsLayout = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2 relative">
+    <div className="flex flex-col items-center justify-center min-h-screen relative">
       <Navbar />
-      <main className="flex flex-col items-center pt-[26px] flex-1 px-20 text-center">
+      <main className="flex flex-col items-center pt-[109px] flex-1 px-20 text-center">
         {children}
       </main>
       <div className="absolute h-[30vh] w-full bottom-0 overflow-visible select-none -z-10">
