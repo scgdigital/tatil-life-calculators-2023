@@ -53,7 +53,7 @@ export const CalculatorsLayout = ({
       <main className="flex flex-col items-center pt-[109px] flex-1 px-5 lg:px-20 text-center">
         {children}
       </main>
-      <div className="absolute h-[40vh] lg:h-[50vh] xl:h-[70vh] min-w-[768px] mx-auto md:w-full bottom-0 left-0 select-none -z-10 transition-all">
+      <div className="absolute h-[40vh] lg:h-[50vh] xl:h-[70vh] min-w-[768px] mx-auto md:w-full max-w-[2600px] bottom-0 left-1/2 -translate-x-1/2 select-none -z-10 transition-all">
         {/* <Image
           src={tatilBg}
           alt="tatil-bg"
@@ -66,7 +66,7 @@ export const CalculatorsLayout = ({
           data={TatilBg.src}
           className="object-fill object-bottom h-full"
         /> */}
-        <TatilBg id="tatil-bg" className="object-bottom h-full" />
+        <TatilBg id="tatil-bg" className="object-bottom h-full w-full" />
       </div>
     </div>
   );
