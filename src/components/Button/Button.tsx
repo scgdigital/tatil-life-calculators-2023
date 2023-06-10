@@ -1,7 +1,8 @@
 "use client";
 import { cva, cx } from "class-variance-authority";
 import { createElement } from "react";
-import rightArrow from "@/assets/svg/rightArrow.svg";
+// @ts-ignore
+import rightArrow from "@/assets/svg/rightArrow.svg?url";
 import Image from "next/image";
 
 type ButtonProps = {

@@ -1,5 +1,6 @@
 import Image from "next/image";
-import rightArrow from "@/assets/svg/rightArrow.svg";
+// @ts-ignore
+import rightArrow from "@/assets/svg/rightArrow.svg?url";
 
 export function BackButton(
   currentStep: number | null,

@@ -81,7 +81,6 @@ export function FormWizard({
     }
   );
 
-  console.log("currentStep", currentStep);
   return (
     <Formik
       enableReinitialize
