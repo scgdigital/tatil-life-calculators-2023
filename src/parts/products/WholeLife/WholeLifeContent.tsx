@@ -7,17 +7,17 @@ import { wholeLifeSteps } from "./formSteps";
 import { useAppSelector } from "@/store/hooks";
 
 export const WholeLifeContent = ({ data }: any) => {
-  const titles = useAppSelector(state => state.enums.title)
-  const state = useAppSelector(state => state)
+  const titles = useAppSelector((state) => state.enums.title);
+  const state = useAppSelector((state) => state);
 
   return (
     <>
-    <FormWizard
-      header={WholeLifeHeader}
-      footer={NextButton}
-      steps={wholeLifeSteps}
-    />
-    {JSON.stringify(data)}
+      <FormWizard
+        header={WholeLifeHeader}
+        footer={NextButton}
+        steps={wholeLifeSteps}
+      />
+      {/* {JSON.stringify(data)} */}
     </>
   );
 };
