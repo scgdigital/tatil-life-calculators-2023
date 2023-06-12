@@ -27,6 +27,7 @@ export const mockOptions = [
 
 export const mockSteps: StepSchema[] = [
   {
+    id: "step-1",
     description: "Step 1",
     title: "Step 1",
     onSubmit: () => {},
@@ -34,6 +35,7 @@ export const mockSteps: StepSchema[] = [
     children: <MockStep1 />,
   },
   {
+    id: "step-2",
     description: "Step 2",
     title: "Step 2",
     onSubmit: () => {},
@@ -41,6 +43,7 @@ export const mockSteps: StepSchema[] = [
     children: <MockStep1 />,
   },
   {
+    id: "step-3",
     description: "Step 3",
     title: "Step 3",
     onSubmit: () => {},
