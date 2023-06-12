@@ -1,18 +1,20 @@
-"use client";
-import { Header } from "@/components/Typography";
-import { FormWizard } from "@/parts/FormWizard/FormWizard";
-import { WholeLifeHeader } from "@/parts/FormWizard/atoms";
-import { NextButton } from "@/parts/PaginationButtons";
-import { mockSteps } from "@/utils/mocks";
+import { WholeLifeContent } from "@/parts/products/WholeLife/WholeLifeContent";
+import { store } from "@/store";
+import { setEnums } from "@/store/enumsSlice";
 
-export default function Home() {
+const fakeGetEnums = async () => {
+  const response = await fetch("https://jsonplaceholder.typicode.com/users/1");
+  const data = await response.json();
+  return data;
+};
+
+export default async function Home() {
+  const enumsData = await fakeGetEnums();
+  store.dispatch(setEnums(enumsData));
+
   return (
     <main className="max-w-[590px] mx-auto">
-      <FormWizard
-        header={WholeLifeHeader}
-        footer={NextButton}
-        steps={mockSteps}
-      />
+      <WholeLifeContent data={store.getState()} />
     </main>
   );
 }
