@@ -1,7 +1,8 @@
 "use client";
 import { cva, cx } from "class-variance-authority";
 import { createElement } from "react";
-import rightArrow from "@/assets/svg/rightArrow.svg";
+// @ts-ignore
+import rightArrow from "@/assets/svg/rightArrow.svg?url";
 import Image from "next/image";
 
 type ButtonProps = {
@@ -77,7 +78,7 @@ export const Button = ({
       }
     ),
     withArrow ? (
-      <div className="flex items-center justify-between flex-wrap">
+      <div className="flex items-center justify-between flex-wrap group">
         <div>{children}</div>
         <Image
           src={rightArrow}
@@ -85,11 +86,11 @@ export const Button = ({
           height={8}
           className={cx(
             "w-2 h-4 ml-5",
-            props.variant === "secondary" && "fill-red",
+            props.variant === "secondary" && "svg-fill-red",
             !props?.disabled
               ? "group-hover:translate-x-1 transition duration-300"
               : "",
-            props.variant === "secondary" && props?.disabled && "fill-grey"
+            props.variant === "secondary" && props?.disabled && "svg-fill-grey"
           )}
           alt="right arrow next"
         />

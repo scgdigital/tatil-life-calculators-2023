@@ -4,6 +4,7 @@ module.exports = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/parts/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
@@ -12,6 +13,9 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "tatil-gradient": `linear-gradient(83.54deg, #000000 0%, #EE2127 52.6%, #EE2127 100%)`,
+      },
+      fontFamily: {
+        roboto: ["Roboto", "sans-serif"],
       },
       colors: {
         tatil: {
