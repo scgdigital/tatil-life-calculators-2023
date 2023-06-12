@@ -1,8 +1,12 @@
+"use client";
 import { withSibling } from "@/utils/methods";
-import { Form, Formik } from "formik";
+import { Form, Formik, FormikProps, FormikValues } from "formik";
 import { isNumber } from "lodash-es";
 import { useRef, useState } from "react";
 import { animated, useTransition } from "react-spring";
+import { setTargetStepId } from "@/store/formConfigurationSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { validationSchemas } from "../products/WholeLife/validationSchema";
 
 type FormWizardProps = {
   header: (
@@ -18,12 +22,14 @@ type FormWizardProps = {
   footer: (
     currentStep: number | null,
     next: () => void,
-    prev: () => void
+    prev: () => void,
+    formik: FormikProps<FormikValues>
   ) => React.ReactNode;
   initialValues?: Record<string, any>;
 };
 
 export type StepSchema = {
+  id: string;
   title: string;
   description: string;
   validationSchema?: any;
@@ -37,6 +43,8 @@ export function FormWizard({
   footer,
   initialValues,
 }: FormWizardProps) {
+  const stepId = useAppSelector((state) => state.formConfiguration.stepId);
+  const dispatch = useAppDispatch();
   const [currentStep, setCurrentStep] = useState(steps.length ? 0 : null);
   const previousStep = useRef<number | null>(null);
   const next = () => {
@@ -44,10 +52,21 @@ export function FormWizard({
     setCurrentStep((prev) =>
       isNumber(prev) ? Math.min(prev + 1, steps.length - 1) : 0
     );
+    dispatch(
+      setTargetStepId({
+        stepId:
+          steps[Math.min((currentStep as number) + 1, steps.length - 1)]?.id,
+      })
+    );
   };
   const prev = () => {
     previousStep.current = currentStep;
     setCurrentStep((prev) => (isNumber(prev) ? Math.max(prev - 1, 0) : 0));
+    dispatch(
+      setTargetStepId({
+        stepId: steps[Math.max((currentStep as number) - 1, 0)]?.id,
+      })
+    );
   };
 
   const transitions = useTransition(
@@ -88,19 +107,27 @@ export function FormWizard({
       onSubmit={async () => {
         console.log("submit");
       }}
-      validationSchema={null}
+      validationSchema={
+        isNumber(currentStep)
+          ? validationSchemas[stepId as keyof typeof validationSchemas]
+          : null
+      }
     >
-      <Form className="">
-        {withSibling({ currentStep, next, prev, totalSteps: steps.length })(
-          header
-        )}
-        {transitions((style, item) => (
-          <animated.div style={{ ...style, minHeight: "420px" }}>
-            {item?.children}
-          </animated.div>
-        ))}
-        {footer(currentStep, next, prev)}
-      </Form>
+      {(props) => {
+        return (
+          <Form className="">
+            {withSibling({ currentStep, next, prev, totalSteps: steps.length })(
+              header
+            )}
+            {transitions((style, item) => (
+              <animated.div style={{ ...style, minHeight: "360px" }}>
+                {item?.children}
+              </animated.div>
+            ))}
+            {footer(currentStep, next, prev, props)}
+          </Form>
+        );
+      }}
     </Formik>
   );
 }
