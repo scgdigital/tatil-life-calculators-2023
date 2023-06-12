@@ -3,6 +3,7 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 
 import { cx } from "class-variance-authority";
+import { Providers } from "@/store/provider";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700", "900"],
@@ -23,7 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cx(roboto.className)}>
-        <CalculatorsLayout>{children}</CalculatorsLayout>
+        <Providers>
+          <CalculatorsLayout>{children}</CalculatorsLayout>
+        </Providers>
       </body>
     </html>
   );

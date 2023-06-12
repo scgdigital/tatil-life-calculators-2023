@@ -3,6 +3,7 @@ import { SmallHeader } from "@/components/Typography";
 import { isEmpty } from "lodash-es";
 
 export function Question({
+  trackId,
   text,
   tooltip,
 }: {
@@ -11,6 +12,7 @@ export function Question({
     content?: string;
     children?: React.ReactNode;
   };
+  trackId?: string;
 }) {
   return !isEmpty(tooltip) ? (
     <div className="flex gap-x-3 items-center">

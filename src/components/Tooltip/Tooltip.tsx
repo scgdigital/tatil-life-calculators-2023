@@ -1,3 +1,4 @@
+"use client"
 //Tooltip.js
 import React, { useState, ReactNode } from "react";
 
@@ -10,7 +11,7 @@ export function WithTooltip({
   const [showTooltip, setShowTooltip] = useState(false);
 
   return (
-    <div className="relative flex-shrink-0 w-[19px] h-[19px] min-h-[12px] min-w-[12px]">
+    <div className="relative flex-shrink-0 w-[19px] h-[19px] min-h-[12px] min-w-[12px] select-none" role="tooltip-more-info">
       <div
         className="flex cursor-pointer items-cente flex-shrink-0 w-full h-full flex-grow"
         onClick={() => setShowTooltip(!showTooltip)}

@@ -8,7 +8,7 @@ export function BackButton(
   prev: () => void
 ) {
   return (
-    <button className="flex items-center gap-x-4" onClick={prev}>
+    <button className="flex items-center gap-x-4" onClick={prev} type="button" role="back-button">
       <Image
         src={rightArrow}
         className="rotate-180 grayscale"
