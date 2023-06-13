@@ -3,7 +3,7 @@ import { withSibling } from "@/utils/methods";
 import { Form, Formik, FormikHelpers, FormikProps, FormikValues } from "formik";
 import { isNumber } from "lodash-es";
 import { useEffect, useRef, useState } from "react";
-import { animated, useTransition } from "react-spring";
+import { animated, config, useTransition } from "react-spring";
 import { setTargetStepId } from "@/store/formConfigurationSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { validationSchemas } from "../products/WholeLife/validationSchema";
@@ -74,6 +74,7 @@ export function FormWizard({
     {
       exitBeforeEnter: true,
       config: {
+        ...config.gentle,
         duration: 350,
       },
       from: {
