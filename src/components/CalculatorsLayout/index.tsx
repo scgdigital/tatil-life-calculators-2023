@@ -11,7 +11,7 @@ export const CalculatorsLayout = ({
   useLoadTatilBackground();
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen relative overflow-x-hidden">
+    <div className="flex flex-col justify-center min-h-screen relative overflow-x-hidden">
       <style>
         {`
         svg {
@@ -27,7 +27,7 @@ export const CalculatorsLayout = ({
         `}
       </style>
       <Navbar />
-      <main className="flex flex-col items-center pt-[109px] flex-1 px-5 lg:px-20 text-center">
+      <main className="block pt-[109px] flex-1 px-5 text-center">
         <div id="portal-root" className="w-0 h-0" />
         {children}
       </main>

@@ -32,6 +32,7 @@ export function NextButton(
   return (
     <div className="ml-auto mr-0 w-[120px]">
       <Button
+        className="transition-colors duration-300"
         variant="primary"
         onClick={handleNext}
         withArrow

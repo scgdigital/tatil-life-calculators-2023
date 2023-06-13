@@ -18,7 +18,12 @@ export function Question({
   className?: string;
 }) {
   return !isEmpty(tooltip) ? (
-    <div className={cx("flex gap-x-3 items-center flex-wrap", className)}>
+    <div
+      className={cx(
+        "flex gap-x-3 items-center flex-wrap md:flex-nowrap",
+        className
+      )}
+    >
       <SmallHeader className="text-left">{text}</SmallHeader>
       <WithTooltip content={tooltip?.content}>
         {tooltip?.children ?? null}

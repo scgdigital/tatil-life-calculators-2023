@@ -13,4 +13,8 @@ export const validationSchemas = {
     gender: Yup.string().required("Required"),
     dateOfBirth: Yup.string().required("Required"),
   }),
+  "step-3": Yup.object().shape({
+    isSmoker: Yup.string().required("Required"),
+    lastSmoked: Yup.string().required("Required"),
+  }),
 };

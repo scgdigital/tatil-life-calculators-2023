@@ -41,7 +41,7 @@ export function Step1() {
         <div className="flex gap-8 my-6">
           <SideBySideButtons
             className="max-w-[310px]"
-            labels={["Yes", "No"]}
+            labels={["No", "Yes"]}
             onClick={(val) => {
               setFieldValue("isTriniResident", val);
             }}
@@ -60,7 +60,7 @@ export function Step1() {
         <div className="flex gap-8 my-6">
           <SideBySideButtons
             className="max-w-[310px]"
-            labels={["Yes", "No"]}
+            labels={["No", "Yes"]}
             onClick={(val) => {
               setFieldValue("isExistingCustomer", val);
             }}

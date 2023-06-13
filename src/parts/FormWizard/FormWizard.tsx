@@ -122,7 +122,7 @@ export function FormWizard({
     >
       {(props) => {
         return (
-          <Form className="">
+          <Form className="w-full flex-shrink-0 flex-grow">
             {withSibling({ currentStep, next, prev, totalSteps: steps.length })(
               header
             )}

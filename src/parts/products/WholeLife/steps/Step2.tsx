@@ -13,7 +13,6 @@ export function Step2() {
   const { values, setFieldValue } = useFormikContext<FormikValues>();
   const { revealedFields } = useRevealingFields();
 
-  console.log({ revealedFields });
   return (
     <div className="flex flex-col w-full">
       <RevealWrapper show={revealedFields.includes("title,firstName,lastName")}>

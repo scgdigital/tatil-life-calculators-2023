@@ -14,7 +14,7 @@ const initialState: IConfigurationState = {
   fieldIds: {
     "step-1": ["lifeInsured", "isTriniResident", "isExistingCustomer"],
     "step-2": ["title,firstName,lastName", "gender", "dateOfBirth"],
-    "step-3": ["isSmoker", "lastSmoked", "occupation"],
+    "step-3": ["isSmoker", "lastSmoked"],
     "step-4": ["email", "phone", "address"],
   },
   stepReached: 0,

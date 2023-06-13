@@ -13,7 +13,7 @@ export default async function Home() {
   store.dispatch(setEnums(enumsData));
 
   return (
-    <main className="max-w-[590px] mx-auto">
+    <main className="max-w-[590px] mx-auto flex-shrink-0 flex-grow">
       <WholeLifeContent data={store.getState()} />
     </main>
   );
