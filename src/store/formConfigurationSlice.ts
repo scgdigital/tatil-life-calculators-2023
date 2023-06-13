@@ -13,7 +13,7 @@ const initialState: IConfigurationState = {
   stepId: "step-1",
   fieldIds: {
     "step-1": ["lifeInsured", "isTriniResident", "isExistingCustomer"],
-    "step-2": ["title", "firstName", "lastName", "gender", "dateOfBirth"],
+    "step-2": ["title,firstName,lastName", "gender", "dateOfBirth"],
     "step-3": ["isSmoker", "lastSmoked", "occupation"],
     "step-4": ["email", "phone", "address"],
   },
@@ -31,6 +31,11 @@ const formConfigurationSlice = createSlice({
       }>
     ) {
       state.stepId = action.payload.stepId;
+      state.stepReached =
+        Object.keys(state.fieldIds).indexOf(action.payload.stepId) >
+        state.stepReached
+          ? Object.keys(state.fieldIds).indexOf(action.payload.stepId)
+          : state.stepReached;
     },
   },
 });

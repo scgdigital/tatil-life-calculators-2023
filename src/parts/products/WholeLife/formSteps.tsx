@@ -1,5 +1,6 @@
 import * as Yup from "yup";
-import { Step1 } from "./steps/Step1";
+import { Step1, Step2 } from "./steps";
+import { validationSchemas } from "./validationSchema";
 
 /* 
 export type StepSchema = {
@@ -18,14 +19,14 @@ export const wholeLifeSteps = [
     title: "Step 1",
     description: "Step 1 description",
     children: <Step1 />,
-    validationSchema: Yup.object().shape({}),
+    validationSchema: validationSchemas["step-1"],
   },
   {
     id: "step-2",
     title: "Step 2",
     description: "Step 2 description",
-    children: <div>Step 2</div>,
-    validationSchema: Yup.object().shape({}),
+    children: <Step2 />,
+    validationSchema: validationSchemas["step-2"],
   },
   {
     id: "step-3",

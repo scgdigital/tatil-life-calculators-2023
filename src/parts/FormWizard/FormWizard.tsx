@@ -1,8 +1,8 @@
 "use client";
 import { withSibling } from "@/utils/methods";
-import { Form, Formik, FormikProps, FormikValues } from "formik";
+import { Form, Formik, FormikHelpers, FormikProps, FormikValues } from "formik";
 import { isNumber } from "lodash-es";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { animated, useTransition } from "react-spring";
 import { setTargetStepId } from "@/store/formConfigurationSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -99,18 +99,25 @@ export function FormWizard({
       },
     }
   );
+  const propsRef = useRef<any>(null);
+
+  useEffect(() => {
+    propsRef?.current?.validateForm();
+  }, [stepId]);
 
   return (
     <Formik
+      innerRef={propsRef}
       enableReinitialize
       initialValues={initialValues ?? {}}
       onSubmit={async () => {
         console.log("submit");
       }}
       validationSchema={
-        isNumber(currentStep)
-          ? validationSchemas[stepId as keyof typeof validationSchemas]
-          : null
+        steps.find((step) => step.id === stepId)?.validationSchema
+        // isNumber(currentStep)
+        //   ? validationSchemas[stepId as keyof typeof validationSchemas]
+        //   : null
       }
     >
       {(props) => {
@@ -120,7 +127,13 @@ export function FormWizard({
               header
             )}
             {transitions((style, item) => (
-              <animated.div style={{ ...style, minHeight: "360px", width: '100%' }}>
+              <animated.div
+                style={{
+                  ...style,
+                  minHeight: "360px",
+                  width: "100%",
+                }}
+              >
                 {item?.children}
               </animated.div>
             ))}

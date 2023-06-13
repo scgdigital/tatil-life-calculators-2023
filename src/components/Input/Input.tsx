@@ -9,7 +9,8 @@ type InputProps = {
   placeholder: string;
   touched?: boolean;
   error?: string;
-  initialValue: any;
+  value: any;
+  onChange?: (value: any) => void;
 };
 
 export function Input({
@@ -17,16 +18,20 @@ export function Input({
   placeholder = "Lorem Ipsum",
   touched,
   error,
-  initialValue,
+  value,
+  onChange,
 }: InputProps) {
-  const [value, setValue] = useState<typeof initialValue>(initialValue || "");
+  const [localValue, setLocalValue] = useState(value ?? "");
   const hasError = !!(touched && error);
   const borderStyle = computeBorderStyle({ hasError, touched, value });
 
-  const handleChange = debounce((e: any) => {
-    setValue(e.target.value);
-  }, 300);
-
+  const onChangeCallback = useCallback((value: string) => {
+    setLocalValue(value);
+    onChange && onChange(value);
+  }, []);
+  const onChangeHandler = (e: any) => {
+    onChangeCallback(e.target.value);
+  };
 
   return (
     <>
@@ -40,8 +45,8 @@ export function Input({
           type={type}
           placeholder={placeholder}
           className="bg-transparent outline-none w-full"
-          onChange={handleChange}
-          defaultValue={String(value)}
+          onChange={onChangeHandler}
+          value={localValue}
         />
       </div>
       {hasError && (

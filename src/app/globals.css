@@ -117,3 +117,8 @@ div .react-datepicker__week {
 div .react-datepicker__day--keyboard-selected {
   background-color: transparent !important;
 }
+
+.deanimate {
+  @apply fixed;
+  transform: none !important;
+}

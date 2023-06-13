@@ -23,7 +23,7 @@ export function WithTooltip({
         </div>
       </div>
       {showTooltip && (
-        <div className="absolute bottom-full -left-full -translate-x-1/2 bg-gray-800 text-white rounded-md py-1 px-2 pointer-events-none transition-all duration-300 z-10 text-sm min-w-[100px]">
+        <div className="absolute bottom-full -left-full -translate-x-1/2 bg-gray-800 text-white rounded-md py-1 px-2 pointer-events-none transition-all duration-300 text-sm min-w-[100px]">
           {content}
         </div>
       )}

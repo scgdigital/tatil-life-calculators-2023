@@ -1,34 +1,37 @@
 "use client";
 /* eslint-disable react-hooks/exhaustive-deps */
+import { createPortal } from "react-dom";
 import { computeBorderStyle } from "@/utils/styles";
 import { cx } from "class-variance-authority";
 import DatePickerComponent from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
-import calendarIcon from "@/assets/svg/calendarIcon.svg";
+// @ts-ignore error-next-line
+import calendarIcon from "@/assets/svg/calendarIcon.svg?url";
 import { format, isValid } from "date-fns";
 import Image from "next/image";
-import { useMemo, useRef, useState } from "react";
+import { MutableRefObject, useEffect, useMemo, useRef, useState } from "react";
 import { IMask, IMaskInput } from "react-imask";
 import { useOnClickOutside } from "usehooks-ts";
 import { DatePickerHeader } from "./atoms/DatePickerHeader";
 
 type DatePickerProps = {
-  initialValue?: string;
+  value?: string;
   onDateChange?: (date: string) => void;
   touched?: boolean;
   error?: string;
 };
 
 export function DatePicker({
-  initialValue,
+  value,
   onDateChange,
   touched,
   error,
 }: DatePickerProps) {
+  const [dialogPortal, setDialogPortal] = useState<React.ReactPortal | null>(
+    null
+  );
   const dialogRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const [value, setValue] = useState<string>(initialValue || "");
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   useOnClickOutside(dialogRef, () => {
     setIsDialogOpen(false);
@@ -94,6 +97,25 @@ export function DatePicker({
     []
   );
 
+  useEffect(() => {
+    if (isDialogOpen && document.getElementById("portal-root")) {
+      const portal = createPortal(
+        <DatePickerDialog
+          isDialogOpen={isDialogOpen}
+          value={value}
+          onDateChange={onDateChange}
+          touched={touched}
+          error={error}
+          dialogRef={dialogRef}
+        />,
+        document.getElementById("portal-root") as HTMLElement
+      );
+      setDialogPortal(portal);
+    } else {
+      setDialogPortal(null);
+    }
+  }, [isDialogOpen, value, onDateChange, touched, error]);
+
   return (
     <>
       <div
@@ -106,11 +128,10 @@ export function DatePicker({
           {...maskOptions}
           ref={inputRef}
           type="text"
-          className="bg-transparent outline-none w-full"
+          className="bg-transparent outline-none w-full placeholder:text-[#9ea6b2]"
           onChange={() => {}}
           onAccept={(_, mask) => {
             if (mask.value && isValid(new Date(mask.value))) {
-              setValue(mask.value);
               if (onDateChange) {
                 onDateChange(mask.value);
               }
@@ -124,6 +145,7 @@ export function DatePicker({
           onClick={() => {
             setIsDialogOpen((prev) => !prev);
           }}
+          type="button"
         >
           <Image
             className="fill-current"
@@ -134,57 +156,73 @@ export function DatePicker({
           />
         </button>
       </div>
-
+      {dialogPortal}
       {hasError && (
         <div className="text-xs text-tatil-red mt-1 w-fit pl-4">{error}</div>
-      )}
-      {isDialogOpen && (
-        <>
-          <div
-            className={cx(
-              "absolute inset-0 w-screen h-screen bg-tatil-black bg-opacity-20",
-              isDialogOpen
-                ? "opacity-100 transition-all duration-500 delay-100"
-                : "opacity-0"
-            )}
-          ></div>
-          <div
-            ref={dialogRef}
-            className="bg-tranparent absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 m-0 z-20 scale-125"
-          >
-            <DatePickerComponent
-              dateFormat={"dd/MM/yyyy"}
-              formatWeekDay={(nameOfDay) => nameOfDay.substr(0, 1)}
-              selected={
-                isValid(
-                  new Date(
-                    Number(value.split("/")[2]),
-                    Number(value.split("/")[1]) - 1,
-                    Number(value.split("/")[0])
-                  )
-                )
-                  ? new Date(
-                      Number(value.split("/")[2]),
-                      Number(value.split("/")[1]) - 1,
-                      Number(value.split("/")[0])
-                    )
-                  : null
-              }
-              onChange={(date: Date) => {
-                const newDate = format(date, "dd/MM/yyyy");
-                setValue(newDate);
-              }}
-              renderCustomHeader={DatePickerHeader}
-              inline
-              dropdownMode="select"
-              className="w-full h-full !bg-transparent"
-              calendarClassName="h-full w-full !font-roboto !font-normal !select-none !font-light !text-[#1d1b20] px-[0.25rem] py-[1rem]"
-            />
-          </div>
-        </>
       )}
     </>
   );
 }
 
 // fn computeBorderStyle(hasError: boolean, touched: boolean, value: any) {
+
+const DatePickerDialog = ({
+  isDialogOpen,
+  value,
+  onDateChange,
+  touched,
+  error,
+  dialogRef,
+}: DatePickerProps & {
+  isDialogOpen: boolean;
+  dialogRef: MutableRefObject<HTMLDivElement | null>;
+}) => {
+  return (
+    <>
+      <div
+        className={cx(
+          "fixed top-0 left-0 w-full h-screen overflow-y-hidden bg-tatil-black bg-opacity-20 z-10",
+          isDialogOpen
+            ? "opacity-100 transition-all duration-500 delay-100"
+            : "opacity-0"
+        )}
+      ></div>
+      <div
+        ref={dialogRef}
+        className="bg-tranparent absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 m-0 z-20 scale-125"
+      >
+        <DatePickerComponent
+          dateFormat={"dd/MM/yyyy"}
+          formatWeekDay={(nameOfDay) => nameOfDay.substr(0, 1)}
+          selected={
+            value &&
+            isValid(
+              new Date(
+                Number(value?.split("/")[2] ?? 0),
+                Number(value?.split("/")[1] ?? 0) - 1,
+                Number(value?.split("/")[0] ?? 0)
+              )
+            )
+              ? new Date(
+                  Number(value?.split("/")[2]),
+                  Number(value?.split("/")[1]) - 1,
+                  Number(value?.split("/")[0])
+                )
+              : null
+          }
+          onChange={(date: Date) => {
+            const newDate = format(date, "dd/MM/yyyy");
+            if (onDateChange) {
+              onDateChange(newDate);
+            }
+          }}
+          renderCustomHeader={DatePickerHeader}
+          inline
+          dropdownMode="select"
+          className="w-full h-full !bg-transparent"
+          calendarClassName="h-full w-full !font-roboto !font-normal !select-none !font-light !text-[#1d1b20] px-[0.25rem] py-[1rem]"
+        />
+      </div>
+    </>
+  );
+};

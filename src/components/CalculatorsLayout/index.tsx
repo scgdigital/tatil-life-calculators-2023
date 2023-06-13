@@ -28,6 +28,7 @@ export const CalculatorsLayout = ({
       </style>
       <Navbar />
       <main className="flex flex-col items-center pt-[109px] flex-1 px-5 lg:px-20 text-center">
+        <div id="portal-root" className="w-0 h-0" />
         {children}
       </main>
       <div className="absolute h-[40vh] lg:h-[50vh] xl:h-[70vh] min-w-[768px] mx-auto md:w-full bottom-0 left-1/2 -translate-x-1/2 select-none -z-10 transition-all">
@@ -104,7 +105,13 @@ function useLoadTatilBackground() {
       .fromTo(
         "#cityBg_svg__car",
         { x: "0", visibility: "visible" },
-        { x: "2000", duration: 16, ease: Power1.easeIn, visibility: "visible" , delay:20 }
+        {
+          x: "2000",
+          duration: 16,
+          ease: Power1.easeIn,
+          visibility: "visible",
+          delay: 20,
+        }
       )
       .add("car_tour");
 
@@ -114,24 +121,26 @@ function useLoadTatilBackground() {
       delay: 22,
     });
 
-    suvTL.fromTo(
-      "#cityBg_svg__suv",
-      {
-        x: 300,
-        y: 0,
-        visibility: "visible",
-        scaleX: 1,
-      },
-      {
-        delay: 5,
-        x: -1500,
-        y: 0,
-        visibility: "visible",
-        duration: 15,
-        scaleX: 1,
-        ease: "linear",
-      }
-    ).pause();
+    suvTL
+      .fromTo(
+        "#cityBg_svg__suv",
+        {
+          x: 300,
+          y: 0,
+          visibility: "visible",
+          scaleX: 1,
+        },
+        {
+          delay: 5,
+          x: -1500,
+          y: 0,
+          visibility: "visible",
+          duration: 15,
+          scaleX: 1,
+          ease: "linear",
+        }
+      )
+      .pause();
 
     suvTL.fromTo(
       "#cityBg_svg__suv",
@@ -163,14 +172,14 @@ function useLoadTatilBackground() {
         {
           scaleX: 1,
           x: "500",
-          y:0,
+          y: 0,
           visibility: "visible",
         },
         {
           x: "-1000",
           visibility: "visible",
           duration: 20,
-          y:0,
+          y: 0,
           scaleX: 1,
           ease: "linear",
         }
@@ -180,13 +189,13 @@ function useLoadTatilBackground() {
         {
           scaleX: -1,
           x: "-1000",
-          y:15,
+          y: 15,
           immediateRender: false,
         },
         {
           scaleX: -1,
           x: "1000",
-          y:15,
+          y: 15,
           duration: 20,
           ease: "linear",
           visibility: "visible",

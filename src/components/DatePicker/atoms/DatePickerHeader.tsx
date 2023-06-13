@@ -1,6 +1,7 @@
 import { getMonth, getYear } from "date-fns";
 import { range } from "lodash-es";
-import chevronRight from "@/assets/svg/rightArrow.svg";
+// @ts-ignore error-next-line
+import chevronRight from "@/assets/svg/rightArrow.svg?url";
 import Image from "next/image";
 import { Dropdown } from "@/components/Dropdown/Dropdown";
 

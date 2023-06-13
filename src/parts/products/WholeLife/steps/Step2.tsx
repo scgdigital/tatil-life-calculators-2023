@@ -1,70 +1,90 @@
+import { RevealWrapper } from "@/components/RevealWrapper/RevealWrapper";
 import { SideBySideButtons } from "@/parts/FormParts";
 import { Question } from "@/parts/FormParts/Question";
-import { useAppSelector } from "@/store/hooks";
 import { FormikValues, useFormikContext } from "formik";
-import { useEffect, useState } from "react";
 import { useRevealingFields } from "../../hooks";
-import { RevealWrapper } from "@/components/RevealWrapper/RevealWrapper";
+import { Dropdown } from "@/components/Dropdown/Dropdown";
+import { useAppSelector } from "@/store/hooks";
+import { Input } from "@/components/Input";
+import { DatePicker } from "@/components/DatePicker";
 
-export function Step1() {
+export function Step2() {
+  const { title } = useAppSelector((state) => state.enums);
   const { values, setFieldValue } = useFormikContext<FormikValues>();
   const { revealedFields } = useRevealingFields();
+
+  console.log({ revealedFields });
   return (
     <div className="flex flex-col w-full">
-      <RevealWrapper show={revealedFields.includes("lifeInsured")}>
+      <RevealWrapper show={revealedFields.includes("title,firstName,lastName")}>
         <Question
-          trackId="lifeInsured"
-          text={"Who are you getting this quote for?"}
+          className="mb-4"
+          trackId="titleAndName"
+          text={"What is your name?"}
           tooltip={{
-            content: "Please specify who is the life insured.",
+            content: "Please specify your title, firstname and lastname.",
           }}
         />
-        <div className="flex gap-8 my-6">
-          <SideBySideButtons
-            className="max-w-[310px]"
-            labels={["Myself", "Another Person"]}
-            onClick={(val) => {
-              setFieldValue("lifeInsured", val);
+        <div className="flex gap-x-2 items-center mb-4">
+          <Dropdown
+            placeholder="Title"
+            className="!w-[200px]"
+            options={title.map((title: string) => ({
+              label: title,
+              value: title,
+            }))}
+            syncValue={values?.title}
+            onOptionChange={(option) => {
+              setFieldValue("title", option);
             }}
-            value={values?.lifeInsured || null}
+          />
+          <Input
+            value={values.firstName}
+            placeholder="First Name"
+            onChange={(val) => {
+              setFieldValue("firstName", val);
+            }}
+          />
+          <Input
+            value={values.lastName}
+            placeholder="Last Name"
+            onChange={(val) => {
+              setFieldValue("lastName", val);
+            }}
           />
         </div>
       </RevealWrapper>
-      <RevealWrapper show={revealedFields.includes("isTriniResident")}>
+      <RevealWrapper show={revealedFields.includes("gender")}>
         <Question
-          trackId="isTriniResident"
-          text={"Are you normally a resident in Trinidad and Tobago?"}
+          trackId="gender"
+          text={"What is your gender"}
           tooltip={{
             content: "Please specify your residency status.",
           }}
         />
-        <div className="flex gap-8 my-6">
+        <div className="flex gap-8 my-4">
           <SideBySideButtons
             className="max-w-[310px]"
-            labels={["Yes", "No"]}
+            labels={["Male", "Female"]}
             onClick={(val) => {
-              setFieldValue("isTriniResident", val);
+              setFieldValue("gender", val);
             }}
-            value={values?.isTriniResident || null}
+            value={values?.gender || null}
           />
         </div>
       </RevealWrapper>
-      <RevealWrapper show={revealedFields.includes("isExistingCustomer")}>
+      <RevealWrapper show={revealedFields.includes("dateOfBirth")}>
         <Question
-          trackId="lifeInsured"
-          text={"Are you an existing Tatil or Tatil Life customer?"}
+          trackId="dateOfBirth"
+          text={"What is your date of birth?"}
           tooltip={{
-            content: "Please specify your customer status.",
+            content: "Please specify your date of birth",
           }}
         />
         <div className="flex gap-8 my-6">
-          <SideBySideButtons
-            className="max-w-[310px]"
-            labels={["Yes", "No"]}
-            onClick={(val) => {
-              setFieldValue("isExistingCustomer", val);
-            }}
-            value={values?.isExistingCustomer || null}
+          <DatePicker
+            onDateChange={(val) => setFieldValue("dateOfBirth", val)}
+            value={values.dateOfBirth}
           />
         </div>
       </RevealWrapper>
