@@ -15,7 +15,7 @@ export function Question({
   trackId?: string;
 }) {
   return !isEmpty(tooltip) ? (
-    <div className="flex gap-x-3 items-center">
+    <div className="flex gap-x-3 items-center flex-wrap">
       <SmallHeader className="text-left">{text}</SmallHeader>
       <WithTooltip content={tooltip?.content}>
         {tooltip?.children ?? null}

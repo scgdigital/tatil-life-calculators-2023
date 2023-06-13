@@ -120,7 +120,7 @@ export function FormWizard({
               header
             )}
             {transitions((style, item) => (
-              <animated.div style={{ ...style, minHeight: "360px" }}>
+              <animated.div style={{ ...style, minHeight: "360px", width: '100%' }}>
                 {item?.children}
               </animated.div>
             ))}

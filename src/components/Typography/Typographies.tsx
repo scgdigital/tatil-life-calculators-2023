@@ -58,7 +58,7 @@ export const SmallHeader = ({
   children: React.ReactNode;
   className?: string;
 }) => (
-  <div className={cx("text-[1rem] font-semibold", className)}>{children}</div>
+  <div className={cx("text-[0.85rem] md:text-[1rem] font-semibold", className)}>{children}</div>
 );
 
 export const SmallHeaderAlt = ({

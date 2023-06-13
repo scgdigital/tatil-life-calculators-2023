@@ -106,7 +106,7 @@ div .react-datepicker__header {
 }
 
 div .react-datepicker__day--today {
-  border: 1px dashed #FF555A !important;
+  border: 1px dashed #ff555a !important;
 }
 
 div .react-datepicker__week {
