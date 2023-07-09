@@ -35,6 +35,7 @@ export function DatePicker({
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   useOnClickOutside(dialogRef, () => {
     setIsDialogOpen(false);
+    setDialogPortal(null);
   });
   const hasError = !!(touched && error);
   const borderStyle = computeBorderStyle({ hasError, touched, value });
@@ -121,7 +122,7 @@ export function DatePicker({
       <div
         className={cx(
           borderStyle,
-          "flex relative bg-tatil-lightgrey w-full py-2 px-4 rounded-[12px] transition-all border-[1px] focus-within:border-tatil-black"
+          "flex relative bg-tatil-lightgrey w-full py-2 px-4 rounded-[12px] transition-all border-[1px] focus-within:border-tatil-black shadow-sm"
         )}
       >
         <IMaskInput

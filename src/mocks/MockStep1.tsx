@@ -13,7 +13,7 @@ export function MockStep1() {
           content: "Please specify who is the life insured.",
         }}
       />
-      <div className="flex gap-8 my-6">
+      <div className="flex gap-8 my-3">
         <SideBySideButtons
           className="max-w-[310px]"
           labels={["Myself", "Another Person"]}

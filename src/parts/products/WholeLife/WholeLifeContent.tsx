@@ -3,12 +3,20 @@
 import { FormWizard } from "@/parts/FormWizard/FormWizard";
 import { WholeLifeHeader } from "@/parts/FormWizard/atoms";
 import { NextButton } from "@/parts/PaginationButtons";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { setEnums } from "@/store/slices/enumsSlice";
+import { isEmpty } from "lodash-es";
+import { useEffect } from "react";
 import { wholeLifeSteps } from "./formSteps";
-import { useAppSelector } from "@/store/hooks";
 
 export const WholeLifeContent = ({ data }: any) => {
-  const titles = useAppSelector((state) => state.enums.title);
-  const state = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (!isEmpty(data)) {
+      // console.log({ data });
+      dispatch(setEnums(data));
+    }
+  }, [dispatch, data]);
 
   return (
     <>

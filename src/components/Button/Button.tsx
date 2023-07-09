@@ -4,6 +4,7 @@ import { createElement } from "react";
 // @ts-ignore
 import rightArrow from "@/assets/svg/rightArrow.svg?url";
 import Image from "next/image";
+import { omit } from "lodash-es";
 
 type ButtonProps = {
   children: React.ReactNode;
@@ -56,6 +57,7 @@ export const Button = ({
   children,
   className,
   withArrow = false,
+  shouldDisable = false,
   ...props
 }: ButtonProps) => {
   const combined = (props?.variant +
@@ -72,9 +74,9 @@ export const Button = ({
         ),
       },
       {
-        ...props,
+        ...(shouldDisable ? props : omit(props, "disabled")),
         type: props?.type || "button",
-        onClick: props?.onClick && !props?.disabled ? props.onClick : () => {},
+        onClick: props?.onClick ? props.onClick : () => {},
       }
     ),
     withArrow ? (

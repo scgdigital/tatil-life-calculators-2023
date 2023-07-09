@@ -3,32 +3,34 @@
 import dropdownArrow from "@/assets/svg/rightArrow.svg?url";
 import { computeBorderStyle } from "@/utils/styles";
 import { cx } from "class-variance-authority";
+import { useField } from "formik";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 type DropdownProps = {
+  name: string;
   variant?: "primary" | "secondary" | "ghost";
   className?: string;
-  touched?: boolean;
-  error?: string;
   initialValue?: any;
   options: Array<Record<"id" | "label" | "value", any>>;
   onOptionChange?: (option: any) => void;
+  onBlur?: () => void;
   syncValue?: any;
   placeholder?: string;
 };
 
 export function Dropdown({
+  name,
   variant = "primary",
   className = "",
-  touched,
-  error,
   options = [],
   onOptionChange,
+  onBlur,
   initialValue,
   syncValue,
   placeholder,
 }: DropdownProps) {
+  const [, { touched, error }] = useField(name);
   const selectRef = useRef<HTMLSelectElement | null>(null);
   const [localValue, setValue] = useState<typeof initialValue>(
     syncValue ?? (initialValue || "")
@@ -59,7 +61,8 @@ export function Dropdown({
       : cx(
           "flex relative bg-tatil-lightgrey w-full py-2 px-4 rounded-[12px] transition-all border-[1px] focus-within:border-tatil-black group",
           borderStyle,
-          "focus:border-tatil-black focus-within:border-tatil-black"
+          "focus:border-tatil-black focus-within:border-tatil-black",
+          "shadow-sm"
         );
 
   return (
@@ -72,6 +75,7 @@ export function Dropdown({
         }}
       >
         <select
+          name={name}
           ref={selectRef}
           className={cx(
             variant !== "ghost"
@@ -81,6 +85,9 @@ export function Dropdown({
           )}
           onChange={handleChange}
           value={localValue}
+          onBlur={() => {
+            onBlur && onBlur();
+          }}
         >
           <option value="">{placeholder ?? "Select..."}</option>
           {options.map((option, index) => (
@@ -105,9 +112,6 @@ export function Dropdown({
           />
         </div>
       </div>
-      {hasError && (
-        <div className="text-xs text-tatil-red mt-1 w-fit pl-4">{error}</div>
-      )}
     </>
   );
 }

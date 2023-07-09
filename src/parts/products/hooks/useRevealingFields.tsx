@@ -3,9 +3,18 @@ import deepdash from "deepdash-es";
 import { FormikValues, useFormikContext } from "formik";
 import lodash, { intersection, isEmpty } from "lodash-es";
 import { useEffect, useState } from "react";
+import { validationSchemas } from "../WholeLife/validationSchema";
+import { AnyObject, AnySchema } from "yup";
 const _ = deepdash(lodash);
 
-export const useRevealingFields = (initialFields = []) => {
+interface ISchemaObject {
+  [key: string]: AnySchema<string, AnyObject, undefined, "">;
+}
+
+export const useRevealingFields = (
+  initialFields = [],
+  shouldValidate = true
+) => {
   // should get the values of the state.formConfiguration object via accessing the object property with the key as the actual state.formConfiguration.stepId
   const formConfiguration = useAppSelector((state) => state.formConfiguration);
   const [fieldReached, setFieldReached] = useState<number>(0);
@@ -48,6 +57,7 @@ export const useRevealingFields = (initialFields = []) => {
     const errorPaths = await validateForm();
     if (intersection(revealedFields, Object.keys(errorPaths)).length) {
       console.log("Error within step, check valSchema");
+      // TO-DO: Implement Error handler & pattern
       return;
     }
     const isMultiField =
@@ -55,12 +65,21 @@ export const useRevealingFields = (initialFields = []) => {
         fieldReached
       ].split(",").length > 1;
     let isMultiStepFinished = false;
+    const fields =
+      formConfiguration.fieldIds[formConfiguration.stepId as string][
+        fieldReached
+      ].split(",");
     if (isMultiField) {
-      const fields =
-        formConfiguration.fieldIds[formConfiguration.stepId as string][
-          fieldReached
-        ].split(",");
-      isMultiStepFinished = fields.every((field) => !isEmpty(values[field])); // add validation success check
+      isMultiStepFinished = fields.every((field) => {
+        const multiSchema: ISchemaObject =
+          validationSchemas[
+            formConfiguration.stepId as keyof typeof validationSchemas
+          ];
+        return (
+          !isEmpty(values[field]) &&
+          multiSchema[field].isValidSync(values[field])
+        );
+      }); // add validation success check
       if (
         isMultiStepFinished &&
         stepFields?.length - 1 > revealedFields.length
@@ -77,13 +96,24 @@ export const useRevealingFields = (initialFields = []) => {
       return;
     }
     if (stepFields?.length - 1 >= revealedFields.length) {
-      setFieldReached((prev) => Math.min(prev + 1, stepFields.length - 1));
-      setRevealedFields((prev) => {
-        return [
-          ...prev,
-          stepFields[Math.min(prev.length, stepFields.length - 1)],
+      const field = stepFields[Math.max(revealedFields.length - 1, 0)];
+      const singleSchema: ISchemaObject =
+        validationSchemas[
+          formConfiguration.stepId as keyof typeof validationSchemas
         ];
-      });
+
+      if (
+        !isEmpty(values[field]) &&
+        singleSchema[field].isValidSync(values[field])
+      ) {
+        setFieldReached((prev) => Math.min(prev + 1, stepFields.length - 1));
+        setRevealedFields((prev) => {
+          return [
+            ...prev,
+            stepFields[Math.min(prev.length, stepFields.length - 1)],
+          ];
+        });
+      }
     }
   };
   useEffect(() => {

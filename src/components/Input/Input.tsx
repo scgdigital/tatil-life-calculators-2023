@@ -1,26 +1,28 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { computeBorderStyle } from "@/utils/styles";
 import { cx } from "class-variance-authority";
+import { useField } from "formik";
 import { debounce } from "lodash-es";
 import { useCallback, useState } from "react";
 
 type InputProps = {
+  name: string;
   type?: "text" | "password" | "email" | "number";
   placeholder: string;
-  touched?: boolean;
-  error?: string;
   value: any;
   onChange?: (value: any) => void;
+  onBlur?: () => void;
 };
 
 export function Input({
+  name,
   type = "text",
   placeholder = "Lorem Ipsum",
-  touched,
-  error,
   value,
   onChange,
+  onBlur,
 }: InputProps) {
+  const [{}, { touched, error }] = useField(name);
   const [localValue, setLocalValue] = useState(value ?? "");
   const hasError = !!(touched && error);
   const borderStyle = computeBorderStyle({ hasError, touched, value });
@@ -38,20 +40,21 @@ export function Input({
       <div
         className={cx(
           borderStyle,
-          "flex relative bg-tatil-lightgrey w-full py-2 px-4 rounded-[12px] transition-all border-[1px] focus-within:border-tatil-black"
+          "flex relative bg-tatil-lightgrey w-full py-2 px-4 rounded-[12px] transition-all border-[1px] focus-within:border-tatil-black shadow-sm"
         )}
       >
         <input
+          name={name}
           type={type}
           placeholder={placeholder}
           className="bg-transparent outline-none w-full"
           onChange={onChangeHandler}
           value={localValue}
+          onBlur={debounce(() => {
+            onBlur && onBlur();
+          }, 300)}
         />
       </div>
-      {hasError && (
-        <div className="text-xs text-tatil-red mt-1 w-fit pl-4">{error}</div>
-      )}
     </>
   );
 }

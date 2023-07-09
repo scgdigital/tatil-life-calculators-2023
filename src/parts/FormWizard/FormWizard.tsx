@@ -1,10 +1,14 @@
 "use client";
+import * as Yup from "yup";
 import { withSibling } from "@/utils/methods";
 import { Form, Formik, FormikHelpers, FormikProps, FormikValues } from "formik";
-import { isNumber } from "lodash-es";
+import { isEmpty, isNumber } from "lodash-es";
 import { useEffect, useRef, useState } from "react";
 import { animated, config, useTransition } from "react-spring";
-import { setTargetStepId } from "@/store/formConfigurationSlice";
+import {
+  setPrevFieldSet,
+  setTargetStepId,
+} from "@/store/slices/formConfigurationSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { validationSchemas } from "../products/WholeLife/validationSchema";
 
@@ -45,9 +49,17 @@ export function FormWizard({
 }: FormWizardProps) {
   const stepId = useAppSelector((state) => state.formConfiguration.stepId);
   const dispatch = useAppDispatch();
-  const [currentStep, setCurrentStep] = useState(steps.length ? 0 : null);
-  const previousStep = useRef<number | null>(null);
+  const [currentStep, setCurrentStep] = useState(0);
+  const previousStep = useRef<number>(0);
+  const prevStepNames = useAppSelector(
+    (state) => state.formConfiguration.prevFieldSet
+  );
   const next = () => {
+    dispatch(
+      setPrevFieldSet(
+        steps[Math.min(currentStep, steps.length - 1)]?.id ?? stepId
+      )
+    );
     previousStep.current = currentStep;
     setCurrentStep((prev) =>
       isNumber(prev) ? Math.min(prev + 1, steps.length - 1) : 0
@@ -60,6 +72,11 @@ export function FormWizard({
     );
   };
   const prev = () => {
+    dispatch(
+      setPrevFieldSet(
+        steps[Math.max((currentStep as number) - 1, 0)]?.id ?? stepId
+      )
+    );
     previousStep.current = currentStep;
     setCurrentStep((prev) => (isNumber(prev) ? Math.max(prev - 1, 0) : 0));
     dispatch(
@@ -104,7 +121,13 @@ export function FormWizard({
 
   useEffect(() => {
     propsRef?.current?.validateForm();
-  }, [stepId]);
+    if (isEmpty(prevStepNames)) {
+      dispatch(
+        setPrevFieldSet(steps[Math.min(currentStep, steps.length - 1)]?.id)
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Formik
@@ -116,7 +139,10 @@ export function FormWizard({
       }}
       validationSchema={
         steps.find((step) => step.id === stepId)?.validationSchema
-        // isNumber(currentStep)
+          ? Yup.object().shape(
+              steps.find((step) => step.id === stepId)?.validationSchema
+            )
+          : null
         //   ? validationSchemas[stepId as keyof typeof validationSchemas]
         //   : null
       }
