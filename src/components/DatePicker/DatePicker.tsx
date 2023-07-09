@@ -17,6 +17,7 @@ import { DatePickerHeader } from "./atoms/DatePickerHeader";
 type DatePickerProps = {
   value?: string;
   onDateChange?: (date: string) => void;
+  onBlur?: () => void;
   touched?: boolean;
   error?: string;
 };
@@ -24,6 +25,7 @@ type DatePickerProps = {
 export function DatePicker({
   value,
   onDateChange,
+  onBlur,
   touched,
   error,
 }: DatePickerProps) {
@@ -36,6 +38,7 @@ export function DatePicker({
   useOnClickOutside(dialogRef, () => {
     setIsDialogOpen(false);
     setDialogPortal(null);
+    onBlur && onBlur();
   });
   const hasError = !!(touched && error);
   const borderStyle = computeBorderStyle({ hasError, touched, value });
@@ -139,6 +142,9 @@ export function DatePicker({
             }
           }}
           value={value}
+          onBlur={() => {
+            onBlur && onBlur();
+          }}
         />
         <button
           className="absolute top-1/2 -translate-y-1/2 right-3 transition-all duration-300 transform-gpu select-none"

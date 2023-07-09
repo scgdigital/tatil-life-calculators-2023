@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { animated, config, useTransition } from "react-spring";
 import {
   setPrevFieldSet,
+  setStepReached,
   setTargetStepId,
 } from "@/store/slices/formConfigurationSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -66,6 +67,12 @@ export function FormWizard({
     );
     dispatch(
       setTargetStepId({
+        stepId:
+          steps[Math.min((currentStep as number) + 1, steps.length - 1)]?.id,
+      })
+    );
+    dispatch(
+      setStepReached({
         stepId:
           steps[Math.min((currentStep as number) + 1, steps.length - 1)]?.id,
       })

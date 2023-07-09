@@ -8,7 +8,8 @@ import { useRevealingFields } from "../../hooks";
 import { ValidationWrapper } from "@/components/ValidationWrapper";
 
 export function Step3() {
-  const { values, setFieldValue } = useFormikContext<FormikValues>();
+  const { values, setFieldValue, setFieldTouched } =
+    useFormikContext<FormikValues>();
   const { revealedFields } = useRevealingFields();
 
   return (
@@ -66,6 +67,9 @@ export function Step3() {
             <DatePicker
               onDateChange={(val) => setFieldValue("lastSmoked", val)}
               value={values.lastSmoked}
+              onBlur={() => {
+                setFieldTouched("lastSmoked", true);
+              }}
             />
           </div>
         </RevealWrapper>

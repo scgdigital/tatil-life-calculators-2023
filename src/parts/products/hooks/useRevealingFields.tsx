@@ -117,7 +117,17 @@ export const useRevealingFields = (
     }
   };
   useEffect(() => {
-    if (stepFields.every((field) => values[field] !== undefined)) {
+    console.log(stepReached);
+    if (
+      stepFields.every(
+        (field) =>
+          values[field] !== undefined ||
+          stepReached >
+            Object.keys(formConfiguration.fieldIds).findIndex(
+              (key) => key === formConfiguration.stepId
+            )
+      )
+    ) {
       handleRevealingFields(true);
       return;
     }

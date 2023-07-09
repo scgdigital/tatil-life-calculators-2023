@@ -33,6 +33,13 @@ const formConfigurationSlice = createSlice({
       }>
     ) {
       state.stepId = action.payload.stepId;
+    },
+    setStepReached(
+      state: IConfigurationState,
+      action: PayloadAction<{
+        stepId: string;
+      }>
+    ) {
       state.stepReached =
         Object.keys(state.fieldIds).indexOf(action.payload.stepId) >
         state.stepReached
@@ -45,6 +52,6 @@ const formConfigurationSlice = createSlice({
   },
 });
 
-export const { setTargetStepId, setPrevFieldSet } =
+export const { setTargetStepId, setPrevFieldSet, setStepReached } =
   formConfigurationSlice.actions;
 export default formConfigurationSlice.reducer;

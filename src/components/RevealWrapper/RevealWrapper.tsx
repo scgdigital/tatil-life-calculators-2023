@@ -30,13 +30,14 @@ export function RevealWrapper({
 
   const { setFieldTouched, errors, getFieldMeta, values } =
     useFormikContext<any>();
-  const [prevStepNames, stepReached, revealsInStep] = useAppSelector(
-    (state) => [
+  const [prevStepNames, stepReached, revealsInStep, fieldIds, stepId] =
+    useAppSelector((state) => [
       state.formConfiguration.prevFieldSet,
       state.formConfiguration.stepReached,
       state.formConfiguration.fieldIds[state.formConfiguration.stepId],
-    ]
-  );
+      state.formConfiguration.fieldIds,
+      state.formConfiguration.stepId,
+    ]);
 
   const transitions = useTransition(show, {
     from: {
@@ -69,9 +70,11 @@ export function RevealWrapper({
     revealsInStep[(revealIndex as number) - 1]
       ?.split(",")
       .every((name: string) => {
-        return (
-          get(errors, name, null) === null && get(values, name, null) !== null
-        );
+        return stepReached >
+          Object.keys(fieldIds).findIndex((key) => key === stepId)
+          ? true
+          : get(errors, name, null) === null &&
+              get(values, name, null) !== null;
       });
 
   return (
