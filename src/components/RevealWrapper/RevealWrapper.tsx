@@ -4,7 +4,7 @@ import { useAppSelector } from "@/store/hooks";
 import { cx } from "class-variance-authority";
 import { useFormikContext } from "formik";
 import { get } from "lodash-es";
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { animated, useTransition } from "react-spring";
 
 interface RevealWrapperProps {
@@ -20,13 +20,22 @@ export function RevealWrapper({
   show,
   names,
 }: RevealWrapperProps) {
+  const [revealIndex, setRevealIndex] = useState<number | null>(null);
+
   const elementRef = useRef<HTMLDivElement | null>(null);
-  const revealIndex =
-    typeof window !== undefined && document
-      ? Array.from(document.querySelectorAll(".reveal")).findIndex(
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && elementRef.current) {
+      setRevealIndex(
+        Array.from(document.querySelectorAll(".reveal")).findIndex(
           (el) => el === elementRef.current
         )
-      : null;
+      );
+    }
+    return () => {
+      setRevealIndex(null);
+    };
+  }, []);
 
   const { setFieldTouched, errors, getFieldMeta, values } =
     useFormikContext<any>();
