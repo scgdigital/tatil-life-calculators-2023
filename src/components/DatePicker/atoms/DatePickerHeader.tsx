@@ -47,6 +47,7 @@ export const DatePickerHeader = ({
       </button>
       <div className="gap-x-4 flex-grow-0 flex items-center text-xs">
         <Dropdown
+          name="month"
           variant="ghost"
           initialValue={months[getMonth(date)]}
           onOptionChange={(option: string | number) => {
@@ -62,6 +63,7 @@ export const DatePickerHeader = ({
           syncValue={months[getMonth(date)]}
         />
         <Dropdown
+          name="year"
           variant="ghost"
           initialValue={getYear(date)}
           onOptionChange={(option: string | number) => {
