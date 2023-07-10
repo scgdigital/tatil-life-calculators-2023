@@ -117,7 +117,6 @@ export const useRevealingFields = (
     }
   };
   useEffect(() => {
-    console.log(stepReached);
     if (
       stepFields.every(
         (field) =>
