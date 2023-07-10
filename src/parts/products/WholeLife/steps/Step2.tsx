@@ -122,6 +122,9 @@ export function Step2() {
             <DatePicker
               onDateChange={(val) => setFieldValue("dateOfBirth", val)}
               value={values.dateOfBirth}
+              onBlur={() => {
+                setFieldTouched("dateOfBirth", true);
+              }}
             />
           </div>
         </RevealWrapper>
