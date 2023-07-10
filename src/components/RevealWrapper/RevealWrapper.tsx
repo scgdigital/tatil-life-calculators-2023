@@ -22,7 +22,7 @@ export function RevealWrapper({
 }: RevealWrapperProps) {
   const elementRef = useRef<HTMLDivElement | null>(null);
   const revealIndex =
-    typeof window !== undefined
+    typeof window !== undefined && document
       ? Array.from(document.querySelectorAll(".reveal")).findIndex(
           (el) => el === elementRef.current
         )
