@@ -24,7 +24,7 @@ export const validationSchemas = {
             test: (value: string | undefined, testContext) => {
               if (!value) {
                 return testContext.createError({
-                  message: "Last smoked date is required",
+                  message: "Required",
                 });
               }
 
@@ -32,7 +32,7 @@ export const validationSchemas = {
 
               if (!isValid(parsedDate)) {
                 return testContext.createError({
-                  message: "Invalid date format",
+                  message: "Invalid Date Format",
                 });
               }
 

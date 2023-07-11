@@ -45,12 +45,9 @@ export function Input({
     <>
       <div
         className={cx(
-          ...(!unstyled
-            ? [
-                borderStyle,
-                "flex relative bg-tatil-lightgrey w-full py-2 px-4 rounded-[12px] transition-all border-[1px] focus-within:border-tatil-black shadow-sm",
-              ]
-            : ["w-full h-full flex justify-center items-center text-center"]),
+          !unstyled
+            ? `flex relative bg-tatil-lightgrey w-full py-2 px-4 rounded-[12px] transition-all border-[1px] focus-within:border-tatil-black shadow-sm ${borderStyle}`
+            : "w-full h-full flex justify-center items-center text-center",
           className
         )}
       >

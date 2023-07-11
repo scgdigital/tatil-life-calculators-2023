@@ -12,7 +12,7 @@ export function computeBorderStyle({
     return "border-tatil-red";
   }
 
-  if (value && !hasError && !touched) {
+  if (value && !hasError) {
     return "border-tatil-black";
   }
 
