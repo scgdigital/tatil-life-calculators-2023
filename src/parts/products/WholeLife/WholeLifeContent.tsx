@@ -3,7 +3,7 @@
 import { FormWizard } from "@/parts/FormWizard/FormWizard";
 import { WholeLifeHeader } from "@/parts/FormWizard/atoms";
 import { NextButton } from "@/parts/PaginationButtons";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useAppDispatch } from "@/store/hooks";
 import { setEnums } from "@/store/slices/enumsSlice";
 import { isEmpty } from "lodash-es";
 import { useEffect } from "react";
@@ -24,6 +24,9 @@ export const WholeLifeContent = ({ data }: any) => {
         header={WholeLifeHeader}
         footer={NextButton}
         steps={wholeLifeSteps}
+        initialValues={{
+          coverAmount: "25000",
+        }}
       />
       {/* {JSON.stringify(data)} */}
     </>

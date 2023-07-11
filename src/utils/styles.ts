@@ -16,5 +16,5 @@ export function computeBorderStyle({
     return "border-tatil-black";
   }
 
-  return "border-tatil-lightgrey";
+  return "border-tatil-grey";
 }

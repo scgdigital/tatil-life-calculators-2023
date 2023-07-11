@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import { withSibling } from "@/utils/methods";
 import { Form, Formik, FormikHelpers, FormikProps, FormikValues } from "formik";
 import { isEmpty, isNumber } from "lodash-es";
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { animated, config, useTransition } from "react-spring";
 import {
   setPrevFieldSet,
@@ -157,21 +157,28 @@ export function FormWizard({
       {(props) => {
         return (
           <Form className="w-full flex-shrink-0 flex-grow">
-            {withSibling({ currentStep, next, prev, totalSteps: steps.length })(
-              header
-            )}
-            {transitions((style, item) => (
-              <animated.div
-                style={{
-                  ...style,
-                  minHeight: "360px",
-                  width: "100%",
-                }}
-              >
-                {item?.children}
-              </animated.div>
-            ))}
-            {footer(currentStep, next, prev, props)}
+            <>
+              {withSibling({
+                currentStep,
+                next,
+                prev,
+                totalSteps: steps.length,
+              })(header)}
+              {transitions((style, item) => (
+                <Fragment key={item?.id}>
+                  <animated.div
+                    style={{
+                      ...style,
+                      minHeight: "360px",
+                      width: "100%",
+                    }}
+                  >
+                    {item?.children}
+                  </animated.div>
+                </Fragment>
+              ))}
+              {footer(currentStep, next, prev, props)}
+            </>
           </Form>
         );
       }}

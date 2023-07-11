@@ -1,3 +1,5 @@
+import { addYears, isAfter, isBefore, isValid, parse } from "date-fns";
+import { isString } from "lodash-es";
 import * as Yup from "yup";
 
 export const validationSchemas = {
@@ -15,6 +17,41 @@ export const validationSchemas = {
   },
   "step-3": {
     isSmoker: Yup.string().required("Required"),
-    lastSmoked: Yup.string().required("Required"),
+    lastSmoked: Yup.string().when("isSmoker", (isSmoker, schema) => {
+      return isSmoker[0] === "Yes"
+        ? schema.test({
+            name: "lastSmoked",
+            test: (value: string | undefined, testContext) => {
+              if (!value) {
+                return testContext.createError({
+                  message: "Last smoked date is required",
+                });
+              }
+
+              const parsedDate = parse(value, "dd/MM/yyyy", new Date());
+
+              if (!isValid(parsedDate)) {
+                return testContext.createError({
+                  message: "Invalid date format",
+                });
+              }
+
+              const fiveYearsAgo = addYears(new Date(), -5);
+              const now = new Date();
+
+              if (
+                isBefore(parsedDate, fiveYearsAgo) ||
+                isAfter(parsedDate, now)
+              ) {
+                return testContext.createError({
+                  message: "Date must be within the last 5 years",
+                });
+              }
+
+              return true;
+            },
+          })
+        : schema;
+    }),
   },
 };

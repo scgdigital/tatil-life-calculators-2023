@@ -1,11 +1,9 @@
-import { SideBySideButtons } from "@/parts/FormParts";
-import { Question } from "@/parts/FormParts/Question";
-import { useAppSelector } from "@/store/hooks";
-import { FormikValues, useFormikContext } from "formik";
-import { useEffect, useState } from "react";
-import { useRevealingFields } from "../../hooks";
 import { RevealWrapper } from "@/components/RevealWrapper/RevealWrapper";
 import { ValidationWrapper } from "@/components/ValidationWrapper";
+import { SideBySideButtons } from "@/parts/FormParts";
+import { Question } from "@/parts/FormParts/Question";
+import { FormikValues, useFormikContext } from "formik";
+import { useRevealingFields } from "../../hooks";
 
 export function Step1() {
   const { values, setFieldValue } = useFormikContext<FormikValues>();

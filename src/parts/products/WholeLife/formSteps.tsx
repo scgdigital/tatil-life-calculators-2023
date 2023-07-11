@@ -1,5 +1,5 @@
-import * as Yup from "yup";
-import { Step1, Step2, Step3 } from "./steps";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Step1, Step2, Step3, Step4 } from "./steps";
 import { validationSchemas } from "./validationSchema";
 
 /* 
@@ -12,7 +12,6 @@ export type StepSchema = {
 };
 
 */
-
 export const wholeLifeSteps = [
   {
     id: "step-1",
@@ -33,6 +32,13 @@ export const wholeLifeSteps = [
     title: "Step 3",
     description: "Step 3 description",
     children: <Step3 />,
+    validationSchema: validationSchemas["step-3"],
+  },
+  {
+    id: "step-4",
+    title: "Step 4",
+    description: "Step 4 description",
+    children: <Step4 />,
     validationSchema: validationSchemas["step-3"],
   },
 ];

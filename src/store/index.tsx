@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { configureStore } from "@reduxjs/toolkit";
 
 import enumsReducer from "./slices/enumsSlice";
@@ -9,7 +9,7 @@ export const store = configureStore({
   reducer: {
     enums: enumsReducer,
     formConfiguration: formConfigurationReducer,
-    validations: validationsReducer,
+    // validations: validationsReducer,
   },
   devTools: process.env.NODE_ENV !== "production",
 });

@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 export type IConfigurationState = {
+  title?: string;
+  description?: string;
   stepId: string;
   fieldIds: {
     [stepId: string]: string[];
@@ -12,6 +14,8 @@ export type IConfigurationState = {
 
 const initialState: IConfigurationState = {
   stepId: "step-1",
+  title: "Let's get a quote in under 90 seconds",
+  description: "",
   fieldIds: {
     "step-1": ["lifeInsured", "isTriniResident", "isExistingCustomer"],
     "step-2": ["title,firstName,lastName", "gender", "dateOfBirth"],
@@ -49,9 +53,15 @@ const formConfigurationSlice = createSlice({
     setPrevFieldSet(state: IConfigurationState, action: PayloadAction<string>) {
       state.prevFieldSet = state.fieldIds[action.payload].join(",");
     },
+    setTitle(state: IConfigurationState, action: PayloadAction<string>) {
+      state.title = action.payload;
+    },
+    setDescription(state: IConfigurationState, action: PayloadAction<string>) {
+      state.description = action.payload;
+    }
   },
 });
 
-export const { setTargetStepId, setPrevFieldSet, setStepReached } =
+export const { setTargetStepId, setPrevFieldSet, setStepReached, setTitle, setDescription } =
   formConfigurationSlice.actions;
 export default formConfigurationSlice.reducer;
