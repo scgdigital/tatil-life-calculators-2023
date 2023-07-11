@@ -71,7 +71,7 @@ export const useRevealingFields = (
       ].split(",");
     if (isMultiField) {
       isMultiStepFinished = fields.every((field) => {
-        const multiSchema: ISchemaObject =
+        const multiSchema: any =
           validationSchemas[
             formConfiguration.stepId as keyof typeof validationSchemas
           ];
@@ -97,7 +97,7 @@ export const useRevealingFields = (
     }
     if (stepFields?.length - 1 >= revealedFields.length) {
       const field = stepFields[Math.max(revealedFields.length - 1, 0)];
-      const singleSchema: ISchemaObject =
+      const singleSchema: any =
         validationSchemas[
           formConfiguration.stepId as keyof typeof validationSchemas
         ];
