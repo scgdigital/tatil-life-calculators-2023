@@ -39,6 +39,6 @@ export const wholeLifeSteps = [
     title: "Step 4",
     description: "Step 4 description",
     children: <Step4 />,
-    validationSchema: validationSchemas["step-3"],
+    validationSchema: validationSchemas["step-4"],
   },
 ];

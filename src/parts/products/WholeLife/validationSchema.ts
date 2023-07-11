@@ -54,4 +54,7 @@ export const validationSchemas = {
         : schema;
     }),
   },
+  "step-4": {
+    coverAmount: Yup.string().required("Required"),
+  },
 };
