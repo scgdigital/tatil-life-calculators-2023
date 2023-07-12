@@ -8,11 +8,30 @@ module.exports = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        "gradient-x": {
+          "0%": {
+            "background-position": "0% 50%",
+            opacity: "0.5",
+          },
+          "50%": {
+            "background-position": "100% 50%",
+            opacity: "1",
+          },
+          "100%": {
+            "background-position": "0% 50%",
+            opacity: "0.5",
+          },
+        },
+      },
+      animation: {
+        "gradient-x": "gradient-x 4s ease infinite",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        "tatil-gradient": `linear-gradient(83.54deg, #000000 0%, #EE2127 52.6%, #EE2127 100%)`,
+        "tatil-gradient": `linear-gradient(83.54deg, #EE2127 0%, #FAFAFA 52.6%, #EE2127 100%)`,
       },
       fontFamily: {
         roboto: ["Roboto", "sans-serif"],
