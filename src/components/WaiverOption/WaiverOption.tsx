@@ -73,37 +73,41 @@ export const WaiverOption = (waiver: Record<string, any>, index: number) => {
       className="flex items-center w-full justify-between"
       key={waiver.title + "-" + index}
     >
-      <WaiverDefaultIcon className="w-8 h-8 fill-tatil-red ml-3" />
-      <div className="ml-2 font-medium text-left">{waiver.title}</div>
-      <div className="relative flex items-center flex-shrink-0 h-6 w-[100px]">
-        <div
-          ref={loadingRef}
-          style={{ width: 0 }}
-          className={cx(
-            "w-8 h-4 rounded-full animate-gradient-x bg-tatil-gradient absolute left-0 top-1/2 -translate-y-1/2",
-            styles.bigBG
-          )}
-        />
-        <div
-          ref={priceRef}
-          style={{ width: 0 }}
-          className="font-medium text-tatil-red absolute top-1/2 -translate-y-1/2 whitespace-nowrap"
-        >
-          {/* format the resolved price to a currency */}
-          {resolvedPrice?.toLocaleString() ? (
-            <>
-              +${resolvedPrice.toLocaleString()}{" "}
-              <span className="text-xs font-light text-[#555]">/ month</span>{" "}
-            </>
-          ) : (
-            ""
-          )}
+      <div className="flex flex-col sm:flex-row sm:items-center">
+        <div className="flex items-center">
+          <WaiverDefaultIcon className="w-8 h-8 fill-tatil-red ml-3" />
+          <div className="ml-2 font-medium text-left">{waiver.title}</div>
+        </div>
+        <div className="relative flex items-center flex-shrink-0 h-6 w-[100px] ml-3">
+          <div
+            ref={loadingRef}
+            style={{ width: 0 }}
+            className={cx(
+              "w-8 h-4 rounded-full animate-gradient-x bg-tatil-gradient absolute left-0 top-1/2 -translate-y-1/2",
+              styles.bigBG
+            )}
+          />
+          <div
+            ref={priceRef}
+            style={{ width: 0 }}
+            className="font-medium text-tatil-red absolute top-1/2 -translate-y-1/2 whitespace-nowrap"
+          >
+            {/* format the resolved price to a currency */}
+            {resolvedPrice?.toLocaleString() ? (
+              <>
+                +${resolvedPrice.toLocaleString()}{" "}
+                <span className="text-xs font-light text-[#555]">/ month</span>{" "}
+              </>
+            ) : (
+              ""
+            )}
+          </div>
         </div>
       </div>
       <AddOrRemoveIcon
         onClick={toggle}
         className={cx(
-          "text-tatil-red font-2xl font-bold font-sans flex items-center min-h-[30px] rounded-full border-2 p-2 border-tatil-red gap-x-2 transition-colors",
+          "text-tatil-red font-2xl font-bold font-sans flex items-center min-h-[30px] rounded-full border-2 p-2 border-tatil-red gap-x-2 transition-colors w-[100px] flex-shrink-0 flex-grow-0",
           isLoading ? "opacity-60" : ""
         )}
         disabled={isLoading}

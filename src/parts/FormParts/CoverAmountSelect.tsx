@@ -7,7 +7,7 @@ export const CoverAmountSelect = () => {
   const { values, errors, setFieldValue, getFieldMeta } =
     useFormikContext<any>();
   return (
-    <div className="w-full flex flex-wrap divide-y lg:divide-y-0 divide-tatil-grey">
+    <div className="w-full flex flex-wrap divide-y lg:divide-y-0 divide-tatil-grey border-b border-tatil-grey lg:border-0 mb-10">
       <div className="basis-full lg:basis-1/2 flex-shrink-0 py-3 flex items-center">
         <div className="basis-full flex-shrink-0 h-full lg:min-h-[100px]">
           <CoverAmountInput

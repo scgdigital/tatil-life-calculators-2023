@@ -2,7 +2,7 @@
 import * as Yup from "yup";
 import { withSibling } from "@/utils/methods";
 import { Form, Formik, FormikHelpers, FormikProps, FormikValues } from "formik";
-import { isEmpty, isNumber } from "lodash-es";
+import { isEmpty, isFunction, isNumber } from "lodash-es";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { animated, config, useTransition } from "react-spring";
 import {
@@ -38,6 +38,12 @@ export type StepSchema = {
   title: string;
   description: string;
   validationSchema?: any;
+  paginationButtons?: (
+    currentStep: number | null,
+    next: () => void,
+    prev: () => void,
+    formik: FormikProps<FormikValues>
+  ) => React.ReactNode;
   onSubmit?: any;
   children: React.ReactNode;
 };
@@ -154,7 +160,7 @@ export function FormWizard({
         //   : null
       }
     >
-      {(props) => {
+      {(formikProps) => {
         return (
           <Form className="w-full flex-shrink-0 flex-grow">
             <>
@@ -177,7 +183,14 @@ export function FormWizard({
                   </animated.div>
                 </Fragment>
               ))}
-              {footer(currentStep, next, prev, props)}
+              {steps[currentStep].hasOwnProperty("paginationButtons")
+                ? (steps[currentStep].paginationButtons as Function)(
+                    currentStep,
+                    next,
+                    prev,
+                    formikProps
+                  )
+                : footer(currentStep, next, prev, formikProps)}
             </>
           </Form>
         );
