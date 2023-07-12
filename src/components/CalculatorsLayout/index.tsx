@@ -27,7 +27,7 @@ export const CalculatorsLayout = ({
         `}
       </style>
       <Navbar />
-      <main className="block pt-[109px] flex-1 px-5 text-center">
+      <main className="block pt-[56px] lg:pt-[109px] flex-1 px-5 text-center">
         <div id="portal-root" className="w-0 h-0" />
         {children}
       </main>

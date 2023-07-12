@@ -75,10 +75,10 @@ export const WaiverOption = (waiver: Record<string, any>, index: number) => {
     >
       <div className="flex flex-col sm:flex-row sm:items-center">
         <div className="flex items-center">
-          <WaiverDefaultIcon className="w-8 h-8 fill-tatil-red ml-3" />
+          <WaiverDefaultIcon className="w-8 h-8 fill-tatil-red" />
           <div className="ml-2 font-medium text-left">{waiver.title}</div>
         </div>
-        <div className="relative flex items-center flex-shrink-0 h-6 w-[100px] ml-3">
+        <div className="relative flex items-center flex-shrink-0 h-6 w-[100px] sm:ml-3">
           <div
             ref={loadingRef}
             style={{ width: 0 }}
