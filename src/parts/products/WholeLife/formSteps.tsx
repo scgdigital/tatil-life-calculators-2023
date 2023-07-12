@@ -14,13 +14,6 @@ export type StepSchema = {
 */
 export const wholeLifeSteps = [
   {
-    id: "step-4",
-    title: "Step 4",
-    description: "Step 4 description",
-    children: <Step4 />,
-    validationSchema: validationSchemas["step-4"],
-  },
-  {
     id: "step-1",
     title: "Step 1",
     description: "Step 1 description",
@@ -40,5 +33,12 @@ export const wholeLifeSteps = [
     description: "Step 3 description",
     children: <Step3 />,
     validationSchema: validationSchemas["step-3"],
+  },
+  {
+    id: "step-4",
+    title: "Step 4",
+    description: "Step 4 description",
+    children: <Step4 />,
+    validationSchema: validationSchemas["step-4"],
   },
 ];
