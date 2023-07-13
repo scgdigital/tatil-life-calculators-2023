@@ -4,7 +4,7 @@ import { cx } from "class-variance-authority";
 import { useField } from "formik";
 import { debounce, isEmpty, isString, omit } from "lodash-es";
 import { useCallback, useState } from "react";
-import { IMaskInput } from "react-imask";
+import { IMaskInput } from "react-imask/esm/index";
 
 type InputProps = {
   name: string;
