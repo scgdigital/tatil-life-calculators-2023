@@ -69,7 +69,6 @@ export function ExtendableInput(props: InputProps) {
               props?.unstyled && "text-center"
             )}
             onAccept={(_, mask) => {
-              console.log(mask.unmaskedValue);
               onChangeCallback(
                 isString(mask.unmaskedValue) ? mask.unmaskedValue : ""
               );

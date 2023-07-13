@@ -64,7 +64,7 @@ export function FormWizard({
   const next = () => {
     dispatch(
       setPrevFieldSet(
-        steps[Math.min(currentStep, steps.length - 1)]?.id ?? stepId
+        steps[Math.min(currentStep + 1, steps.length - 1)]?.id ?? stepId
       )
     );
     previousStep.current = currentStep;

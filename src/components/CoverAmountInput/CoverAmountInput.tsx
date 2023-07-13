@@ -64,7 +64,6 @@ export const CAInputComponent = ({
       if (+value % 2500 !== 0) {
         // Round to the nearest upper 1000
         const roundedValue = Math.ceil(+value / 2500) * 2500;
-        console.log({ roundedValue });
         onChange(roundedValue.toString());
       } else {
         // Add 1000 to the value

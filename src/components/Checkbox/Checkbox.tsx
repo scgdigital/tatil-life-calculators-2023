@@ -33,7 +33,10 @@ export function Checkbox({
         <input
           type="checkbox"
           className="opacity-0 absolute h-6 w-6"
-          onChange={() => setIsChecked(!isChecked)}
+          onChange={() => {
+            setIsChecked(!isChecked);
+            onCheck?.(!isChecked);
+          }}
           {...props}
         />
         <div

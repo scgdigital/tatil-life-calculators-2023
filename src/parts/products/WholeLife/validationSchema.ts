@@ -1,6 +1,6 @@
 import { addYears, isAfter, isBefore, isValid, parse } from "date-fns";
-import { isString } from "lodash-es";
 import * as Yup from "yup";
+import "yup-phone-lite";
 
 export const validationSchemas = {
   "step-1": {
@@ -55,6 +55,27 @@ export const validationSchemas = {
     }),
   },
   "step-4": {
+    email: Yup.string()
+      .trim()
+      .required("Required")
+      .email("Invalid email. Please use email format ___@___.___")
+      .matches(
+        new RegExp(
+          /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        ),
+        "Invalid email. Please use email format ___@___.___"
+      )
+      .required("Required"),
+    phoneNumber: Yup.string()
+      .phone("TT", "A valid Trinidad and Tobago phone number is required")
+      .matches(
+        new RegExp(/^\d{10}$/),
+        "Invalid phone number. Please use phone number format (000)-000-0000"
+      )
+      .required("Required"),
+    hasAgreed: Yup.boolean().oneOf([true], "Required").required("Required"),
+  },
+  "step-5": {
     coverAmount: Yup.string().required("Required"),
   },
 };

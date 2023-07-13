@@ -1,19 +1,21 @@
 import { useAppSelector } from "@/store/hooks";
-import { ErrorMessage, useFormikContext } from "formik";
-import { animated, useTransition } from "react-spring";
-import { useEffect, useState, useRef } from "react";
+import { cx } from "class-variance-authority";
+import { ErrorMessage } from "formik";
 import debounce from "lodash-es/debounce";
+import { useEffect, useRef, useState } from "react";
+import { animated, useTransition } from "react-spring";
 
 export const ValidationWrapper = ({
+  className = "",
   children,
   names,
   show: originalShow = false,
 }: {
+  className?: string;
   children: React.ReactNode;
   names: string[];
   show?: boolean;
 }) => {
-  const { getFieldMeta } = useFormikContext<any>();
   const [show, setShow] = useState(originalShow);
   const debouncedShow = useRef(
     debounce((value) => setShow(value), 300)
@@ -38,7 +40,7 @@ export const ValidationWrapper = ({
 
   const errorLabels = useAppSelector((state) => state.enums.errorLabels);
   return (
-    <div className="flex flex-col w-full items-start">
+    <div className={cx("flex flex-col w-full items-start gap-y-1", className)}>
       {children}
       {transitions((styles, item) => {
         return item && show ? (

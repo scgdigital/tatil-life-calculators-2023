@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { QuoteCallbackButtons } from "@/parts/FormParts";
-import { Step1, Step2, Step3, Step4 } from "./steps";
+import { Step1, Step2, Step3, Step4, Step5 } from "./steps";
 import { validationSchemas } from "./validationSchema";
 
 /* 
@@ -41,6 +41,13 @@ export const wholeLifeSteps = [
     description: "Step 4 description",
     children: <Step4 />,
     validationSchema: validationSchemas["step-4"],
+  },
+  {
+    id: "step-5",
+    title: "Step 5",
+    description: "Step 5 description",
+    children: <Step5 />,
+    validationSchema: validationSchemas["step-5"],
     paginationButtons: QuoteCallbackButtons,
   },
 ];

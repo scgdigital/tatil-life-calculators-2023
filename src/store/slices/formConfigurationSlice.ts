@@ -20,7 +20,8 @@ const initialState: IConfigurationState = {
     "step-1": ["lifeInsured", "isTriniResident", "isExistingCustomer"],
     "step-2": ["title,firstName,lastName", "gender", "dateOfBirth"],
     "step-3": ["isSmoker", "lastSmoked"],
-    "step-4": ["email", "phone", "address"],
+    "step-4": ["email", "phoneNumber", "hasAgreed"],
+    "step-5": [],
   },
   stepReached: 0,
   prevFieldSet: null,
@@ -58,10 +59,15 @@ const formConfigurationSlice = createSlice({
     },
     setDescription(state: IConfigurationState, action: PayloadAction<string>) {
       state.description = action.payload;
-    }
+    },
   },
 });
 
-export const { setTargetStepId, setPrevFieldSet, setStepReached, setTitle, setDescription } =
-  formConfigurationSlice.actions;
+export const {
+  setTargetStepId,
+  setPrevFieldSet,
+  setStepReached,
+  setTitle,
+  setDescription,
+} = formConfigurationSlice.actions;
 export default formConfigurationSlice.reducer;

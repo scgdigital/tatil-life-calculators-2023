@@ -3,13 +3,8 @@ import deepdash from "deepdash-es";
 import { FormikValues, useFormikContext } from "formik";
 import lodash, { get, isEmpty } from "lodash-es";
 import { useEffect, useRef, useState } from "react";
-import { AnyObject, AnySchema } from "yup";
 import { validationSchemas } from "../WholeLife/validationSchema";
 const _ = deepdash(lodash);
-
-interface ISchemaObject {
-  [key: string]: AnySchema<string, AnyObject, undefined, "">;
-}
 
 export const useRevealingFields = (
   initialFields = [],

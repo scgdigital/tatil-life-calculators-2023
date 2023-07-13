@@ -1,27 +1,16 @@
 import { DatePicker } from "@/components/DatePicker";
 import { RevealWrapper } from "@/components/RevealWrapper/RevealWrapper";
+import { ValidationWrapper } from "@/components/ValidationWrapper";
 import { SideBySideButtons } from "@/parts/FormParts";
 import { Question } from "@/parts/FormParts/Question";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { FormikValues, useFormikContext } from "formik";
 import { useRevealingFields } from "../../hooks";
-import { ValidationWrapper } from "@/components/ValidationWrapper";
-import { useEffect } from "react";
-import {
-  setDescription,
-  setTitle,
-} from "@/store/slices/formConfigurationSlice";
 
 export function Step3() {
   const { values, setFieldValue, setFieldTouched } =
     useFormikContext<FormikValues>();
   const { revealedFields } = useRevealingFields();
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(setTitle("Let's get a quote in under 90 seconds"));
-    dispatch(setDescription(""));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
   return (
     <div className="flex flex-col w-full">
       <ValidationWrapper

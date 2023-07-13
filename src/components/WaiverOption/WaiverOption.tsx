@@ -37,7 +37,7 @@ export const WaiverOption = (waiver: Record<string, any>, index: number) => {
       gsap.fromTo(
         loadingRef.current,
         { width: 0, transformOrigin: "right" },
-        { width: "100%", duration: 1, ease: "power1.inOut" }
+        { width: "100%", duration: 1 }
       );
 
       // simulate server call
@@ -52,14 +52,14 @@ export const WaiverOption = (waiver: Record<string, any>, index: number) => {
       gsap.to(loadingRef.current, {
         width: 0,
         transformOrigin: "right",
-        duration: 0.2,
+        duration: 0.3,
         onComplete: () => {
           // set the resolved price
           setResolvedPrice(response);
 
           // animate to show the resolved price
           gsap.to(priceRef.current, {
-            width: "auto",
+            width: "100%",
             duration: 1,
             onComplete: () => setIsLoading(false),
           });
