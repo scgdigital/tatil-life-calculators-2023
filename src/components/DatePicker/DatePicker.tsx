@@ -10,7 +10,7 @@ import calendarIcon from "@/assets/svg/calendarIcon.svg?url";
 import { format, isValid } from "date-fns";
 import Image from "next/image";
 import { MutableRefObject, useEffect, useMemo, useRef, useState } from "react";
-import { IMask, IMaskInput } from "react-imask";
+import { IMask, IMaskInput } from "react-imask/esm/index";
 import { useOnClickOutside } from "usehooks-ts";
 import { DatePickerHeader } from "./atoms/DatePickerHeader";
 
